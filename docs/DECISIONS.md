@@ -234,6 +234,17 @@ caller-owned rows, a rate limit on every route that starts model or worker work 
 workspace), and live calls proving anonymous → 401, non-member → 403, viewer → 403 for every route above viewer
 level. New routes are covered automatically; allow-lists must name existing routes.
 
+## ADR-035 — Design: "The Annual Report" identity; tenants brand the accent, logo and type mood only
+Chosen with the user from a direction round (PRODUCT.md, `.impeccable/surfaces/frontend-src-app-app.md`): agent
+output is set like an audited report — deep green rail, paper ground, ink rules, grotesk figures at report scale whose
+superscript note keys open "Notes" that say how each figure was counted and link to its records. Workspace branding
+is server-side: the logo is sniffed, size/pixel-limited, re-encoded to PNG (SVG refused) and its palette extracted;
+the most prominent chromatic colour becomes the brand. The brand fills buttons whenever ink or white text reaches
+4.5:1 on it; links and focus use a hue-preserving lightness fit that reaches 4.5:1 on every surface of each theme; the
+rail marker needs 3:1 on the green; brass-like accents switch note keys to ink. Only `--brand-*` and `--mood-*` CSS
+variables change at runtime — status colours, layout and chrome are the platform's in every workspace. Type moods are
+a curated set of five pairings matched from the industry (owner can override); fonts load only when used.
+
 ## ADR-010 — Ports
 Postgres 55470 (dbs `abos`, `abos_test`), Redis 56470, API 8470, web 3470. Other local stacks occupy
 5432, 6379, 8000, 15433, 55450, 55460, 56390, 8460, 3460.

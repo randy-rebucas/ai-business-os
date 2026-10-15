@@ -99,7 +99,7 @@ export default function InterviewPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Company setup" title="Business interview"
+      <PageHeader title="Business interview"
         description="Follow-up questions about how your business really works — approval limits, exceptions, unwritten rules. Your answers shape how AI employees are configured."
         actions={canWrite && <Button onClick={generate} loading={busy}><RefreshCw /> Find new questions</Button>} />
       {note && <Alert tone="info" className="mb-4">{note}</Alert>}

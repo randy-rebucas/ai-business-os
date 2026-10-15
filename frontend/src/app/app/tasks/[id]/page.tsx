@@ -58,7 +58,7 @@ export default function RunDetailPage() {
       <Link href={run.parent ? `/app/tasks/${run.parent.run_id}` : "/app/tasks"} className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-fg">
         <ArrowLeft className="size-4" /> {run.parent ? run.parent.task_title : "Tasks"}
       </Link>
-      <PageHeader eyebrow={`${run.agent_name} · ${TRIGGER_LABEL[run.trigger_type] ?? run.trigger_type}`} title={run.task_title}
+      <PageHeader context={`${run.agent_name} · ${TRIGGER_LABEL[run.trigger_type] ?? run.trigger_type}`} title={run.task_title}
         description={RUN_STATUS[run.status]?.help} actions={<>
           <RunStatusBadge status={run.status} />
           {cancellable && <Button size="sm" variant="secondary" onClick={cancel} loading={busy}>Cancel run</Button>}

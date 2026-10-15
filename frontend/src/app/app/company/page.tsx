@@ -50,7 +50,6 @@ export default function CompanyPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Company profile"
         title={p.trading_name || p.company_name}
         description={`The approved description of your business. Last updated ${formatDate(p.updated_at)}.`}
       />

@@ -1,0 +1,132 @@
+{
+  "title": "Phase 8 — choose the visual world for AI Business OS",
+  "question": "The roll assigned the Annual Report identity for the app. Keep it, take an alternate, or re-roll. Tenant workspaces will tint the accent and type mood from their own logo and industry on top of whichever world you pick; status colours stay fixed.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Annual Report",
+      "kicker": "THE ROLL",
+      "lineage": "Philippine listed-company annual reports and their identity programs",
+      "thesis": "Every number the agents produce is set like an audited figure, with a note that leads to its evidence.",
+      "palette": ["#0f3d36", "#f4f6f5", "#121a18", "#c8962b", "#2a7a68"],
+      "materials": ["confident grotesk numerals at report scale", "notes-to-the-statements footnotes", "deep green shell on cool paper white"],
+      "viewport": "Green side rail with the workspace's logo; Control Center leads with three report-scale figures (tasks completed, awaiting approval, month spend), each carrying a superscript note key; the notes column on the right lists the evidence each key points to.",
+      "risk": "Can read like a static PDF if the notes are decorative rather than live links into evidence.",
+      "raised": [
+        {"from": "challenger-j-card", "raise": "Budgets and limits are drawn as a fill against a hard capacity (monthly budget, runs per day), never as an unbounded number."},
+        {"from": "challenger-emission-rail", "raise": "Run and action states carry a glyph and a word as well as a colour: solid done, dashed pending, struck refused."},
+        {"from": "challenger-wayfinding", "raise": "Setup and readiness show only the next decision ahead and what it unlocks."},
+        {"from": "challenger-vertical-feed", "raise": "The approval inbox puts one held action in full focus with the next one queued behind it."}
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html"
+    },
+    {
+      "id": "model-pick",
+      "label": "Official Receipt & Approval Stamp",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "BIR official receipts, numbered OR series and office rubber stamps",
+      "thesis": "Approvals land like a dated rubber stamp and every piece of evidence carries a serial number, the way Filipino offices already prove things happened.",
+      "palette": ["#f7f6f1", "#1d2a5b", "#6b3fa0", "#c8312b", "#8a8f99"],
+      "materials": ["form-stock ground with printed field rules", "violet and red stamp ink", "serial-numbered evidence (EV-000123)"],
+      "viewport": "Navy top bar; approval inbox leads, each held action a numbered form with its exact parameters; deciding drops a dated APPROVED or REJECTED stamp with the approver's initials.",
+      "risk": "Familiar from government paperwork; the stamp must stay a signature moment, not cover every screen.",
+      "html": ".impeccable/mocks/decision/model-pick.html"
+    },
+    {
+      "id": "challenger-centre-rail",
+      "label": "Centre-Rail Reference Setting",
+      "verdict": "competitive",
+      "lineage": "wide-margin reference editions with a keyed centre rail",
+      "thesis": "Daily reports set as reference pages: two columns of findings, vermilion evidence keys on a centre rail, apparatus in the margin.",
+      "palette": ["#f1ece0", "#1a1a1a", "#c43d1f"],
+      "materials": ["hairline ruling at one device pixel", "three ink values only", "small-caps apparatus"],
+      "viewport": "A daily report as two columns of findings around a rail of evidence keys, the margin holding the linked runs.",
+      "case": "Holds product clarity for reports and evidence; loses audience identification with busy SMB owners on phones.",
+      "risk": "Reads as a book, not a tool, on dense operational screens.",
+      "hero": "https://impeccable.style/worlds/cards/rw-centre-rail-reference-setting-hero.webp",
+      "html": ".impeccable/mocks/decision/challenger-centre-rail.html"
+    },
+    {
+      "id": "challenger-warm-app",
+      "label": "Warm Consumer App Surface",
+      "verdict": "competitive",
+      "lineage": "friendly consumer apps (e-wallets, delivery apps) Filipino owners use daily",
+      "thesis": "Soft cards on a warm ground, plain-language labels, one action colour only where something can be done.",
+      "palette": ["#f6efe6", "#ffffff", "#0b7a5a", "#2b2622"],
+      "materials": ["large-radius cards", "thumb-reach bottom bar on mobile", "action-only colour"],
+      "viewport": "Card stack: approvals waiting, today's runs, budget; the one green action on each card.",
+      "case": "Wins audience identification on phones; loses product clarity for dense governance tables and evidence.",
+      "risk": "Undersells control and auditability; looks like a consumer app.",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-warm-consumer-app-surface-hero.webp",
+      "html": ".impeccable/mocks/decision/challenger-warm-app.html"
+    },
+    {
+      "id": "challenger-vertical-feed",
+      "label": "Vertical Media Feed",
+      "verdict": "declined",
+      "lineage": "full-screen vertical video feeds",
+      "thesis": "One item owns the viewport; the next is one snap away.",
+      "palette": ["#000000", "#ffffff"],
+      "materials": ["full-bleed media", "glyph rail"],
+      "viewport": "One agent action per screen.",
+      "case": "Loses both axes: governance needs comparison and tables.",
+      "risk": "Entertainment grammar on accountability work.",
+      "kept": "One held action in full focus at a time in the approval inbox.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-vertical-video-feed-surface-hero.webp"
+    },
+    {
+      "id": "challenger-j-card",
+      "label": "Cassette J-Card",
+      "verdict": "declined",
+      "lineage": "hand-lettered mixtape inlays",
+      "thesis": "Two sides that must not overflow the tape.",
+      "palette": ["#1f3fa6", "#ffffff", "#d32f2f"],
+      "materials": ["ballpoint on ruled inlay"],
+      "viewport": "Side A / side B task lists.",
+      "case": "Loses both axes: nostalgic, not operational.",
+      "risk": "Costume on a working screen.",
+      "kept": "Hard capacity: budgets and limits shown as fill against a fixed length.",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-cassette-j-card-hero.webp"
+    },
+    {
+      "id": "challenger-wayfinding",
+      "label": "Terminal Yellow Wayfinding",
+      "verdict": "declined",
+      "lineage": "airport sign systems",
+      "thesis": "Each junction shows only the choices ahead.",
+      "palette": ["#ffd200", "#000000", "#ffffff"],
+      "materials": ["overhead sign bands", "pictograms"],
+      "viewport": "Setup as a chain of signed junctions.",
+      "case": "Loses both axes outside onboarding.",
+      "risk": "Yellow everywhere fights status colours.",
+      "kept": "Show only the next decision ahead in setup and readiness.",
+      "hero": "https://impeccable.style/worlds/cards/wayfinding-cartography-signage-terminal-yellow-wayfinding-hero.webp"
+    },
+    {
+      "id": "challenger-emission-rail",
+      "label": "Emission-Line Rail",
+      "verdict": "declined",
+      "lineage": "spectrogram plates",
+      "thesis": "State carried by line form, not hue.",
+      "palette": ["#2b2d30", "#e9e4d8", "#f5c542"],
+      "materials": ["hairlines on charcoal"],
+      "viewport": "Agents as ticks on one rail.",
+      "case": "Loses both axes: too abstract for owners.",
+      "risk": "Night-lab mood in a daytime office.",
+      "kept": "States carry shape and words as well as colour.",
+      "hero": "https://impeccable.style/worlds/cards/operate-c-emission-line-rail-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A clean SaaS admin: white surfaces, slate text, one blue accent, executed impeccably.",
+    "palette": ["#ffffff", "#0f172a", "#2563eb"],
+    "materials": ["clean grid", "neutral cards"],
+    "viewport": "Sidebar, KPI cards, tables — the arrangement every admin expects.",
+    "risk": "Indistinguishable from every other AI-agent dashboard by design.",
+    "html": ".impeccable/mocks/decision/canon.html"
+  },
+  "steer": true
+}

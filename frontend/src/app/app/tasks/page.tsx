@@ -53,7 +53,7 @@ export default function TasksPage() {
 
   return (
     <>
-      <PageHeader eyebrow="AI workforce" title="Tasks"
+      <PageHeader title="Tasks"
         description="Run an active agent's approved tasks now, or ask an agent something. Every step is checked against its approved permissions and recorded as evidence. Scheduled and event-driven tasks start on their own." />
       {error && <Alert tone="danger" className="mb-6">{error}</Alert>}
       {agents.error ? <ErrorState error={agents.error} /> : !agents.data ? <Spinner /> : (

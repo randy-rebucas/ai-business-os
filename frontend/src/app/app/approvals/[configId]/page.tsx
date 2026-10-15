@@ -81,7 +81,7 @@ export default function ApprovalSummaryPage() {
   return (
     <>
       <Link href="/app/approvals" className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-fg"><ArrowLeft className="size-4" /> Approval inbox</Link>
-      <PageHeader eyebrow="Approval summary" title={`${agent.name} — configuration v${cfg.version}`}
+      <PageHeader title={`${agent.name} — configuration v${cfg.version}`}
         description="Everything this agent would be allowed to do. Review it as a whole: the decision covers exactly this version."
         actions={<ConfigBadge status={cfg.status} />} />
       {done && <Alert tone="success" className="mb-6">Decision recorded.</Alert>}

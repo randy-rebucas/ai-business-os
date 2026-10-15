@@ -110,7 +110,7 @@ export default function SimulationCenterPage() {
   const agent = catalog.data?.find((d) => d.key === (key || catalog.data?.find((x) => x.status !== "available")?.key || "finance"));
   return (
     <>
-      <PageHeader eyebrow="AI workforce" title="Simulation & evaluation"
+      <PageHeader title="Simulation & evaluation"
         description="Business scenarios every AI employee is tested against before it may act — including attempts to break the rules. Runs happen in a sandbox." />
       <section aria-labelledby="runs-h" className="mb-10">
         <h2 id="runs-h" className="mb-3 text-sm font-semibold">Recent runs</h2>

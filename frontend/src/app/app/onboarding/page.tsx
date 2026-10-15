@@ -152,7 +152,7 @@ function Wizard() {
   return (
     <>
       <PageHeader
-        eyebrow={`Step ${index + 1} of ${STEPS.length}`}
+        context={`Step ${index + 1} of ${STEPS.length}`}
         title="Set up your company"
         description="Your AI employees learn your business from this profile and the documents you add. Nothing here is mandatory — skip anything and come back later."
       />

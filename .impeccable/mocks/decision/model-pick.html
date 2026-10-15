@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Official Receipt — Approval inbox</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}body{width:1440px;height:900px;overflow:hidden;font:15px/1.45 "Archivo",sans-serif;color:#1d2a5b;background:#f7f6f1}
+header{height:58px;background:#1d2a5b;color:#fff;display:flex;align-items:center;gap:28px;padding:0 28px}.b{font-weight:800}.t{opacity:.75}.t.on{opacity:1;border-bottom:2px solid #fff;padding-bottom:4px}
+.wrap{display:grid;grid-template-columns:300px 1fr;gap:28px;padding:28px}
+.q h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a8f99;margin-bottom:10px}.qi{border:1px solid #c9ccd3;background:#fff;padding:12px 14px;margin-bottom:10px}.qi.on{border:2px solid #1d2a5b}.serial{font:700 12px "JetBrains Mono";color:#c8312b}
+.form{background:#fff;border:1px solid #c9ccd3;padding:28px 32px;position:relative}
+.top{display:flex;justify-content:space-between;border-bottom:2px solid #1d2a5b;padding-bottom:12px}.top h1{font-size:26px;font-weight:800}.no{font:700 18px "JetBrains Mono";color:#c8312b}
+.row{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid #dcdee3;padding:11px 0}.row span{color:#8a8f99;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.body{font:500 14px "JetBrains Mono";background:#f7f6f1;padding:14px;margin-top:12px;line-height:1.6;color:#1d2a5b}
+.act{display:flex;gap:12px;margin-top:22px}.btn{padding:11px 18px;font-weight:700;border:2px solid #1d2a5b}.p{background:#1d2a5b;color:#fff}
+.stamp{position:absolute;right:46px;top:120px;transform:rotate(-8deg);border:4px double #6b3fa0;color:#6b3fa0;padding:10px 18px;text-align:center;font-weight:800;letter-spacing:.12em;opacity:.9}
+.stamp small{display:block;font:700 12px "JetBrains Mono";letter-spacing:.04em}
+.ev{margin-top:22px;font-size:13px;color:#8a8f99}.ev b{font-family:"JetBrains Mono";color:#1d2a5b}
+</style></head><body>
+<header><span class="b">AI Business OS · Harbor Foods</span><span class="t">Control Center</span><span class="t on">Approval inbox (2)</span><span class="t">Tasks &amp; runs</span><span class="t">Reports</span><span class="t">Agents</span></header>
+<div class="wrap"><div class="q"><h3>Held actions</h3>
+<div class="qi on"><div class="serial">AR-000214</div><b>Send payment reminder</b><div style="font-size:13px;color:#8a8f99">Finance · 3 h ago</div></div>
+<div class="qi"><div class="serial">AR-000213</div><b>Escalation: INV-9002 total</b><div style="font-size:13px;color:#8a8f99">Finance · 3 h ago</div></div>
+<h3 style="margin-top:22px">Decided today</h3><div class="qi"><div class="serial">AR-000212</div>Briefing to CEO · <b style="color:#6b3fa0">APPROVED</b></div></div>
+<div class="form"><div class="top"><h1>Send approved payment reminder</h1><div class="no">AR-000214</div></div>
+<div class="row"><span>Agent</span><div>Finance and Accounting Agent · config v1 · hash 7c98…</div></div>
+<div class="row"><span>Tool</span><div>reminder.send · external send · approval always</div></div>
+<div class="row"><span>To</span><div>ap@bayside.example.com</div></div>
+<div class="row"><span>Policy</span><div>Credit Control Policy — invoices &gt; 30 days overdue</div></div>
+<div class="body">Subject: Payment reminder — invoice INV-9001<br>Our records show a balance of 5000.00 USD on invoice INV-9001, due 2026-09-05 (40 days overdue)…</div>
+<div class="act"><span class="btn p">Approve this exact action</span><span class="btn">Reject</span></div>
+<div class="stamp">APPROVED<small>15 OCT 2026 · 14:32 · M.S.</small></div>
+<div class="ev">Evidence: <b>EV-001882</b> invoices.read · <b>EV-001883</b> reminder.draft · parameters hash 3f1a…</div></div></div>
+</body></html>

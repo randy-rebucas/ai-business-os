@@ -298,7 +298,7 @@ export default function ConfigurePage() {
   return (
     <>
       <Link href={`/app/agents/${id}`} className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-fg"><ArrowLeft className="size-4" /> {agent.name}</Link>
-      <PageHeader eyebrow="Agent configuration" title={`Configure ${agent.name}`}
+      <PageHeader title={`Configure ${agent.name}`}
         description="Everything here is reviewed by the CEO before the agent can be tested or activated."
         actions={cfg && <ConfigBadge status={cfg.status} />} />
       {!can("agent.configure") ? <Alert tone="warning">Only managers, admins and owners can edit agent configurations.</Alert>

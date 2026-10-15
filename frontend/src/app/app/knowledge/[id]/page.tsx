@@ -228,7 +228,7 @@ export default function DocumentPage() {
     <>
       <Link href="/app/knowledge" className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-fg"><ArrowLeft className="size-4" /> Documents</Link>
       <PageHeader
-        eyebrow={DOC_TYPE_LABEL[doc.doc_type] ?? doc.doc_type}
+        context={DOC_TYPE_LABEL[doc.doc_type] ?? doc.doc_type}
         title={doc.title}
         description={<span className="flex flex-wrap items-center gap-2"><StatusBadge status={doc.status} /><AccessBadge level={doc.access_level} />
           {doc.subject && <span>{doc.subject}</span>}</span>}

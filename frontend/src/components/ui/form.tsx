@@ -3,7 +3,7 @@ import { forwardRef, useId } from "react";
 import { cn } from "@/lib/utils";
 
 const control =
-  "w-full rounded-md border border-border-strong bg-bg-2 px-3 text-sm text-fg placeholder:text-subtle " +
+  "w-full rounded-sm border border-border-strong bg-bg-2 px-3 text-sm text-fg placeholder:text-subtle " +
   "hover:border-subtle focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 " +
   "focus-visible:ring-accent/25 disabled:opacity-60 aria-[invalid=true]:border-danger";
 

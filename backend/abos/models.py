@@ -2,6 +2,7 @@
 
 from abos.agents.models import AgentConfiguration, AgentDefinition, AgentInstance, TaskDefinition, TaskDependency
 from abos.audit.models import AuditEvent
+from abos.branding.models import WorkspaceBranding
 from abos.business.models import Draft, Expense, Invoice, InvoiceLine, Payment
 from abos.company.models import (
     BusinessObjective,
@@ -54,5 +55,5 @@ __all__ = [
     "TaskDependency", "SimulationResult", "SimulationRun", "SimulationScenario",
     "ActionRequest", "Draft", "Expense", "Invoice", "InvoiceLine", "Payment", "ToolExecution", "WorkflowRun",
     "DailyReport", "ExecutionReconciliation", "Notification", "NotificationDelivery", "NotificationPreference",
-    "ReportEvidence", "OrgExport", "OrganizationDeletion",
+    "ReportEvidence", "OrgExport", "OrganizationDeletion", "WorkspaceBranding",
 ]

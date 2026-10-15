@@ -176,7 +176,7 @@ export default function EvalsPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Knowledge" title="Knowledge evaluation"
+      <PageHeader title="Knowledge evaluation"
         description="Test whether answers find the right documents, cite them correctly, admit gaps, and never leak documents or follow instructions planted in them." />
       <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
         <div className="space-y-6">

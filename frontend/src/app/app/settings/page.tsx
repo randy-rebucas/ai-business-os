@@ -7,6 +7,7 @@ import { useSWRConfig } from "swr";
 import { Button } from "@/components/ui/button";
 import { Alert, Badge, Card, CardHeader, ErrorState, PageHeader, Spinner, Table, td, th } from "@/components/ui/display";
 import { Field, Input, Select } from "@/components/ui/form";
+import { BrandingCard } from "@/components/settings/branding";
 import { DataControlsCard } from "@/components/settings/data-controls";
 import { api } from "@/lib/api";
 import { useAction, useGlobalData, useOrgData } from "@/lib/hooks";
@@ -284,11 +285,12 @@ export default function SettingsPage() {
   const { membership } = useSession();
   return (
     <>
-      <PageHeader title="Settings" description="Workspace, people, data controls and your own account." />
+      <PageHeader title="Settings" description="Workspace, branding, people, data controls and your own account." />
       <div className="space-y-6">
-        {membership && <WorkspaceCard key={membership.organization.id} />}
+        {membership && <WorkspaceCard key={`workspace-${membership.organization.id}`} />}
+        {membership && <BrandingCard key={`brand-${membership.organization.id}`} />}
         {membership && <MembersCard />}
-        {membership && <DataControlsCard key={membership.organization.id} />}
+        {membership && <DataControlsCard key={`data-${membership.organization.id}`} />}
         <AccountCard />
         <NewWorkspaceCard />
       </div>

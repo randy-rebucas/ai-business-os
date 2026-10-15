@@ -22,4 +22,6 @@ USER abos
 EXPOSE 8470
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
   CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8470/api/health', timeout=4).status == 200 else 1)"
-CMD ["uvicorn", "abos.main:app", "--host", "0.0.0.0", "--port", "8470", "--proxy-headers", "--no-server-header"]
+# Keep-alive longer than the web proxy's pooled connections (Node keeps sockets ~60 s): with uvicorn's 5 s default the
+# server closes a socket the proxy is about to reuse and the request fails with ECONNRESET → a 500 for the user.
+CMD ["uvicorn", "abos.main:app", "--host", "0.0.0.0", "--port", "8470", "--proxy-headers", "--no-server-header", "--timeout-keep-alive", "75"]

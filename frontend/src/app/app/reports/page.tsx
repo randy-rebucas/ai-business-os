@@ -39,7 +39,7 @@ export default function ReportsPage() {
   };
   return (
     <>
-      <PageHeader eyebrow="Reporting" title="Daily reports"
+      <PageHeader title="Daily reports"
         description="One report per agent per day, built only from its task runs and recorded tool executions. Each day's report is finalised after midnight in the company's time zone." />
       {error && <Alert tone="danger" className="mb-6">{error}</Alert>}
       <Card className="mb-6">

@@ -5,14 +5,14 @@ import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-semibold transition-[background-color,border-color,color,transform] duration-150 active:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        primary: "bg-accent text-on-accent shadow-sm hover:bg-accent-strong",
-        secondary: "border border-border-strong bg-bg-2 text-fg shadow-sm hover:bg-surface",
+        primary: "bg-accent-fill text-on-accent-fill ring-1 ring-inset ring-black/10 hover:bg-accent-fill-strong",
+        secondary: "border border-border-strong bg-bg-2 text-fg hover:border-rule",
         ghost: "text-muted hover:bg-surface hover:text-fg",
-        danger: "border border-danger/40 bg-bg-2 text-danger hover:bg-danger/10",
+        danger: "border border-danger/50 bg-bg-2 text-danger hover:bg-danger/10",
       },
       size: {
         sm: "h-8 px-3",

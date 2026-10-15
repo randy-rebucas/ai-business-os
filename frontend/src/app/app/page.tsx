@@ -145,7 +145,7 @@ export default function OverviewPage() {
   return (
     <>
       <PageHeader
-        eyebrow={membership.organization.name}
+        context={membership.organization.name}
         title={`Good to see you, ${firstName}`}
         description={`You're signed in as ${[membership.job_title, ROLE_LABEL[membership.role]].filter(Boolean).join(" · ")}.`}
       />

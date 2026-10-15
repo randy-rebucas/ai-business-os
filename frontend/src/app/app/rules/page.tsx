@@ -168,7 +168,7 @@ export default function RulesPage() {
     .sort((a, b) => current.statuses.indexOf(a.status) - current.statuses.indexOf(b.status));
   return (
     <>
-      <PageHeader eyebrow="Governance" title="Business rules"
+      <PageHeader title="Business rules"
         description="Rules found in your approved documents, interview answers and profile. Nothing is enforced until you confirm it — facts, proposals, open questions and conflicts are kept apart."
         actions={canReview && <>
           <Button variant="secondary" onClick={() => setAdding(true)} disabled={adding}><Plus /> Add a rule</Button>

@@ -23,7 +23,9 @@ Full requirements: `docs/SPEC.md` (the original master prompt — authoritative)
 - Migrate: `cd backend; .venv\Scripts\alembic upgrade head` · new migration:
   `.venv\Scripts\alembic revision --autogenerate -m "..." --rev-id 000N` then add RLS calls by hand
 - Seed: `cd backend; .venv\Scripts\python -m abos.seed` → `ceo@abos-dev.example.com` / `dev-password-change-me`
-- API: `cd backend; .venv\Scripts\uvicorn abos.main:app --port 8470` (docs at http://127.0.0.1:8470/api/docs)
+- API: `cd backend; .venv\Scripts\uvicorn abos.main:app --port 8470 --timeout-keep-alive 75` (docs at
+  http://127.0.0.1:8470/api/docs; the keep-alive avoids ECONNRESET 500s through Next's proxy). For a full Playwright run
+  set `$env:ABOS_RL_REGISTER_IP='500/3600'` first — every spec registers from 127.0.0.1
 - Worker (needed unless ABOS_JOBS_EAGER=true): `cd backend; .venv\Scripts\celery -A abos.jobs.worker worker --pool=solo -Q abos --loglevel=info`
   · sweeper: `.venv\Scripts\python -m abos.jobs sweep` · scheduler tick (due schedules, overdue events, deferred
   runs): `.venv\Scripts\python -m abos.jobs tick` (both run under `celery -A abos.jobs.worker beat`)
@@ -90,6 +92,16 @@ Full requirements: `docs/SPEC.md` (the original master prompt — authoritative)
   RLS test) — a platform table that references a deleted org uses another column name.
 - List/dashboard/report endpoints must keep constant query counts (`tests/test_performance.py`) — batch, don't loop.
 - Log context: jobs carry `job_id/job_kind/org_id/target_id` (+ `run_id`); errors go through `report_exception`.
+
+## Design rules (Phase 8 — PRODUCT.md, DESIGN.md, ADR-035; tests enforce the contrast parts)
+- Colours come from tokens in `frontend/src/app/globals.css`; tenants may only change `--brand-*` (accent, fill, note,
+  marker) and `--mood-*` (fonts) via `lib/branding.tsx`. Never let tenant colour reach status colours or the rail.
+- Filled controls use `bg-accent-fill text-on-accent-fill`; text links/focus use `text-accent`. Text on a tenant
+  marker colour is forbidden (only 3:1 guaranteed).
+- Accent derivation lives in `abos/branding/colors.py`; a new surface colour must be added to its fit targets and to
+  `tests/test_branding.py`'s surface lists.
+- Report figures use `components/ui/report.tsx` (Figures/Figure/Notes/ReportSection); every note must describe real
+  data and link to real records. No eyebrow labels above headings; context lines go under the title.
 
 ## Gotchas
 - SQLAlchemy fires `after_commit`/`after_rollback` on SAVEPOINT release/rollback too — after-commit hooks must skip

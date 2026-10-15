@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 from abos import models  # noqa: F401  (registers all ORM models)
 from abos.agents.router import router as agents_router
 from abos.audit.router import router as audit_router
+from abos.branding.router import router as branding_router
 from abos.business.router import router as business_router
 from abos.company.router import router as company_router
 from abos.core import metrics
@@ -163,5 +164,5 @@ def metrics_endpoint(authorization: str | None = Header(default=None)):
 for r in (auth_router, orgs_router, org_router, company_router, audit_router, documents_router, knowledge_router,
           interview_router, agents_router, simulation_agent_router, simulations_router, rules_router,
           actions_router, approvals_router, business_router, workflows_router, tools_router, reports_router,
-          dashboard_router, notifications_router, usage_router, privacy_router):
+          dashboard_router, notifications_router, usage_router, privacy_router, branding_router):
     app.include_router(r)

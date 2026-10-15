@@ -25,7 +25,7 @@ export default function RunPage() {
   return (
     <>
       <Link href={`/app/agents/${run.instance_id}/readiness`} className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-fg"><ArrowLeft className="size-4" /> Readiness & deployment</Link>
-      <PageHeader eyebrow="Simulation run" title={`${run.agent_name ?? "Agent"} — configuration v${run.config_version}`}
+      <PageHeader title={`${run.agent_name ?? "Agent"} — configuration v${run.config_version}`}
         description="Every scenario ran in a sandbox: no real system or customer was contacted." actions={<RunBadge run={run} />} />
       {isRunning(run) ? (
         <Card className="mb-6 px-5 py-4">

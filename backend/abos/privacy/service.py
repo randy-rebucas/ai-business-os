@@ -196,6 +196,15 @@ def build_archive(db: Session, org_id: uuid.UUID) -> tuple[bytes, dict[str, Any]
             except (OSError, ValueError, KeyError):
                 counts.setdefault("_missing_files", 0)
                 counts["_missing_files"] += 1
+        from abos.branding.models import WorkspaceBranding  # noqa: PLC0415
+
+        brand = db.scalar(select(WorkspaceBranding).where(WorkspaceBranding.organization_id == org_id))
+        if brand is not None and brand.logo_key:
+            try:
+                z.writestr("files/branding/logo.png", storage.get(brand.logo_key))
+                files += 1
+            except (OSError, ValueError, KeyError):
+                counts["_missing_files"] = counts.get("_missing_files", 0) + 1
         manifest = {"format": EXPORT_FORMAT, "organization_id": str(org_id), "generated_at": _now().isoformat(),
                     "tables": counts, "files": files,
                     "notes": "Search embeddings are not exported; re-indexing the documents rebuilds them."}

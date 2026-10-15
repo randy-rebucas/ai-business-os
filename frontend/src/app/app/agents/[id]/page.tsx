@@ -371,7 +371,7 @@ export default function AgentProfilePage() {
   return (
     <>
       <Link href="/app/agents" className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-fg"><ArrowLeft className="size-4" /> Agent directory</Link>
-      <PageHeader eyebrow={agent.definition.department} title={agent.name}
+      <PageHeader context={agent.definition.department} title={agent.name}
         description={agent.definition.title} actions={<LifecycleBadge status={agent.status} />} />
       <Actions agent={agent} onChange={refresh} />
       {cfg && <div className="mb-6 space-y-3"><IssueList issues={cfg.issues} /><GenerationNotes generation={cfg.generation} /></div>}

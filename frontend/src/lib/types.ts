@@ -20,6 +20,39 @@ export type Organization = {
   deletion_scheduled_at: string | null;
 };
 
+// ---- workspace branding (abos/branding/schemas.py) ----
+export type BrandMood = { key: string; label: string; display: string; text: string; description: string };
+export type Branding = {
+  logo_url: string | null;
+  logo_width: number | null;
+  logo_height: number | null;
+  palette: { hex: string; share: number }[];
+  logo_brand: string | null;
+  accent: {
+    source: "platform" | "logo" | "owner";
+    brand: string;
+    light: string;
+    on_light: string;
+    fill_light: string;
+    on_fill_light: string;
+    soft_light: string;
+    dark: string;
+    on_dark: string;
+    fill_dark: string;
+    on_fill_dark: string;
+    soft_dark: string;
+    marker: string;
+    note_light: string;
+    note_dark: string;
+    adjusted: string[];
+    contrast: Record<"light_on_ground" | "text_on_light" | "dark_on_ground" | "text_on_dark" | "marker_on_rail", number>;
+  };
+  mood: BrandMood;
+  mood_source: "industry" | "owner";
+  industry: string | null;
+  moods: BrandMood[];
+};
+
 // ---- data controls (abos/privacy/schemas.py) ----
 export type Retention = {
   notifications_days: number;

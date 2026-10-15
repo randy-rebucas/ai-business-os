@@ -233,7 +233,7 @@ function Drafts() {
 export default function RecordsPage() {
   return (
     <>
-      <PageHeader eyebrow="Workspace" title="Business records"
+      <PageHeader title="Business records"
         description="The authoritative records agents work from. People record them here; agents only read them and prepare drafts, through registered tools." />
       <Tabs label="Record types" items={[
         { key: "invoices", label: "Invoices & receivables", content: <Invoices /> },

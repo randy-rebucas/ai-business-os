@@ -3,21 +3,21 @@
 import {
   Bell,
   Bot,
-  CircleDollarSign,
-  FileBarChart,
-  Gauge,
   Building2,
+  CircleDollarSign,
   ClipboardCheck,
+  FileBarChart,
   FileText,
   FlaskConical,
   FlaskRound,
+  Gauge,
   Inbox,
   LayoutDashboard,
   ListChecks,
   LogOut,
   Menu,
-  Receipt,
   MessagesSquare,
+  Receipt,
   Scale,
   ScrollText,
   Settings,
@@ -28,9 +28,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Logo } from "@/components/brand/logo";
+import { BrandingApplier, useBranding, useLogoSrc } from "@/lib/branding";
 import { useOrgData } from "@/lib/hooks";
 import { ROLE_LABEL } from "@/lib/labels";
 import { useSession } from "@/lib/session";
@@ -38,16 +39,34 @@ import { cn, formatDateTime } from "@/lib/utils";
 
 type NavItem = { href: string; label: string; icon: React.ComponentType<{ className?: string }>; perm?: string };
 
-// Only features that exist are listed.
+// Only features that exist are listed. Ordered by how often the owner needs them: the daily review first.
 const NAV: { group: string; items: NavItem[] }[] = [
   {
-    group: "Workspace",
+    group: "Daily review",
     items: [
       { href: "/app", label: "Overview", icon: LayoutDashboard },
-      { href: "/app/onboarding", label: "Company setup", icon: ClipboardCheck, perm: "company.read" },
-      { href: "/app/company", label: "Company profile", icon: Building2, perm: "company.read" },
-      { href: "/app/interview", label: "Business interview", icon: MessagesSquare, perm: "company.read" },
-      { href: "/app/records", label: "Business records", icon: Receipt, perm: "records.read" },
+      { href: "/app/control-center", label: "Control Center", icon: Gauge, perm: "task.read" },
+      { href: "/app/approvals", label: "Approval inbox", icon: Inbox, perm: "agent.read" },
+      { href: "/app/reports", label: "Daily reports", icon: FileBarChart, perm: "report.read" },
+      { href: "/app/notifications", label: "Notifications", icon: Bell, perm: "notification.read" },
+      { href: "/app/tasks", label: "Tasks & runs", icon: ListChecks, perm: "task.read" },
+    ],
+  },
+  {
+    group: "AI workforce",
+    items: [
+      { href: "/app/agents", label: "Agent directory", icon: Bot, perm: "agent.read" },
+      { href: "/app/agents/team", label: "Build your team", icon: Users, perm: "agent.read" },
+      { href: "/app/agents/catalog", label: "Agent catalog", icon: Store, perm: "agent.read" },
+      { href: "/app/simulations", label: "Simulation & evaluation", icon: FlaskRound, perm: "agent.read" },
+    ],
+  },
+  {
+    group: "Governance",
+    items: [
+      { href: "/app/rules", label: "Business rules", icon: Scale, perm: "knowledge.read" },
+      { href: "/app/usage", label: "Usage & costs", icon: CircleDollarSign, perm: "usage.read" },
+      { href: "/app/audit", label: "Audit log", icon: ScrollText, perm: "audit.read" },
     ],
   },
   {
@@ -59,33 +78,15 @@ const NAV: { group: string; items: NavItem[] }[] = [
     ],
   },
   {
-    group: "AI workforce",
+    group: "Company",
     items: [
-      { href: "/app/agents", label: "Agent directory", icon: Bot, perm: "agent.read" },
-      { href: "/app/tasks", label: "Tasks & runs", icon: ListChecks, perm: "task.read" },
-      { href: "/app/agents/team", label: "Build your team", icon: Users, perm: "agent.read" },
-      { href: "/app/agents/catalog", label: "Agent catalog", icon: Store, perm: "agent.read" },
-      { href: "/app/simulations", label: "Simulation & evaluation", icon: FlaskRound, perm: "agent.read" },
+      { href: "/app/records", label: "Business records", icon: Receipt, perm: "records.read" },
+      { href: "/app/company", label: "Company profile", icon: Building2, perm: "company.read" },
+      { href: "/app/onboarding", label: "Company setup", icon: ClipboardCheck, perm: "company.read" },
+      { href: "/app/interview", label: "Business interview", icon: MessagesSquare, perm: "company.read" },
+      { href: "/app/settings", label: "Settings", icon: Settings },
     ],
   },
-  {
-    group: "Reporting",
-    items: [
-      { href: "/app/control-center", label: "Control Center", icon: Gauge, perm: "task.read" },
-      { href: "/app/reports", label: "Daily reports", icon: FileBarChart, perm: "report.read" },
-      { href: "/app/notifications", label: "Notifications", icon: Bell, perm: "notification.read" },
-      { href: "/app/usage", label: "Usage & costs", icon: CircleDollarSign, perm: "usage.read" },
-    ],
-  },
-  {
-    group: "Governance",
-    items: [
-      { href: "/app/approvals", label: "Approval inbox", icon: Inbox, perm: "agent.read" },
-      { href: "/app/rules", label: "Business rules", icon: Scale, perm: "knowledge.read" },
-      { href: "/app/audit", label: "Audit log", icon: ScrollText, perm: "audit.read" },
-    ],
-  },
-  { group: "Admin", items: [{ href: "/app/settings", label: "Settings", icon: Settings }] },
 ];
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
@@ -98,34 +99,39 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
     .map((i) => i.href)
     .filter((h) => pathname === h || (h !== "/app" && pathname.startsWith(`${h}/`)))
     .sort((a, b) => b.length - a.length)[0];
+  const activeRef = useRef<HTMLAnchorElement | null>(null);
+  useEffect(() => {
+    activeRef.current?.scrollIntoView({ block: "nearest" });
+  }, [activeHref]);
   return (
-    <nav aria-label="Main" className="flex flex-1 flex-col gap-5 overflow-y-auto px-3 py-4">
+    // The fade at the bottom says the list continues when it doesn't fit.
+    <nav aria-label="Main" className="flex flex-1 flex-col gap-5 overflow-y-auto px-3 py-4 [mask-image:linear-gradient(to_bottom,#000_calc(100%-2.5rem),transparent)] [scrollbar-color:var(--color-sidebar-2)_transparent]">
       {NAV.map(({ group, items }) => {
         const visible = items.filter((i) => !i.perm || can(i.perm));
         if (!visible.length) return null;
         return (
           <div key={group}>
-            <p className="px-3 pb-1.5 text-[11px] font-medium uppercase tracking-wider text-sidebar-muted">{group}</p>
-            <ul className="space-y-0.5">
+            <p className="px-3 pb-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-sidebar-muted">{group}</p>
+            <ul className="space-y-px">
               {visible.map((item) => {
                 const active = item.href === activeHref;
                 return (
                   <li key={item.href}>
                     <Link
+                      ref={active ? activeRef : undefined}
                       href={item.href}
                       onClick={onNavigate}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-                        active
-                          ? "bg-white/10 text-sidebar-fg"
-                          : "text-sidebar-muted hover:bg-white/5 hover:text-sidebar-fg",
+                        "flex items-center gap-2.5 rounded-sm px-2 py-1.5 text-sm transition-colors",
+                        active ? "bg-sidebar-2 font-semibold text-white" : "text-sidebar-fg/85 hover:bg-white/5 hover:text-white",
                       )}
                     >
-                      <item.icon className={cn("size-4", active && "text-sidebar-accent")} />
+                      <span aria-hidden className={cn("size-1.5 shrink-0", active ? "bg-sidebar-accent" : "bg-transparent")} />
+                      <item.icon className={cn("size-4 shrink-0", active ? "text-sidebar-accent" : "text-sidebar-muted")} />
                       {item.label}
                       {item.href === "/app/notifications" && unread > 0 && (
-                        <span className="ml-auto rounded-full bg-sidebar-accent px-1.5 text-[11px] font-semibold text-sidebar" aria-label={`${unread} unread`}>{unread}</span>
+                        <span className="ml-auto rounded-sm bg-white px-1.5 text-[11px] font-bold text-sidebar" aria-label={`${unread} unread`}>{unread}</span>
                       )}
                     </Link>
                   </li>
@@ -139,31 +145,52 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-function OrgSwitcher() {
+function initials(name: string) {
+  return name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]!.toUpperCase()).join("");
+}
+
+/** The tenant's identity in the platform's chrome: its own logo (on a white tile — logos are drawn for light
+ *  grounds) or its initials on its brand marker colour. */
+function Workspace() {
   const { me, orgId, switchOrg, membership } = useSession();
-  if (me.memberships.length <= 1) {
-    return (
-      <div className="flex items-center gap-2 px-3 text-sm">
-        <Building2 className="size-4 text-sidebar-muted" aria-hidden />
-        <span className="truncate text-sidebar-fg">{membership?.organization.name}</span>
-      </div>
-    );
-  }
+  const { data: branding } = useBranding();
+  const logo = useLogoSrc(branding?.logo_url);
+  const name = membership?.organization.name ?? "";
   return (
-    <label className="block px-3">
-      <span className="sr-only">Active workspace</span>
-      <select
-        value={orgId ?? ""}
-        onChange={(e) => switchOrg(e.target.value)}
-        className="h-9 w-full rounded-md border border-white/15 bg-white/5 px-2 text-sm text-sidebar-fg [&>option]:text-black"
-      >
-        {me.memberships.map((m) => (
-          <option key={m.organization.id} value={m.organization.id}>
-            {m.organization.name} ({ROLE_LABEL[m.role]})
-          </option>
-        ))}
-      </select>
-    </label>
+    <div className="mx-3 border-y border-white/10 py-3">
+      <div className="flex items-center gap-3 px-1">
+        {logo ? (
+          // eslint-disable-next-line @next/next/no-img-element -- a blob: URL of the tenant's re-encoded PNG
+          <img src={logo} alt={`${name} logo`} className="size-10 shrink-0 rounded-sm bg-white object-contain p-1" />
+        ) : (
+          <span aria-hidden className="grid size-10 shrink-0 place-items-center rounded-sm bg-white font-display text-sm font-extrabold text-sidebar">
+            {initials(name) || "—"}
+          </span>
+        )}
+        <div className="min-w-0">
+          <p className="truncate font-semibold text-white">{name}</p>
+          <p className="truncate text-xs text-sidebar-muted">
+            {[branding?.industry, membership && ROLE_LABEL[membership.role]].filter(Boolean).join(" · ")}
+          </p>
+        </div>
+      </div>
+      {me.memberships.length > 1 && (
+        <label className="mt-3 block px-1">
+          <span className="sr-only">Active workspace</span>
+          <select
+            value={orgId ?? ""}
+            onChange={(e) => switchOrg(e.target.value)}
+            className="h-8 w-full rounded-sm border border-white/15 bg-white/5 px-2 text-sm text-sidebar-fg [&>option]:text-black"
+          >
+            {me.memberships.map((m) => (
+              <option key={m.organization.id} value={m.organization.id}>
+                {m.organization.name} ({ROLE_LABEL[m.role]})
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+    </div>
   );
 }
 
@@ -172,14 +199,8 @@ function UserFooter() {
   return (
     <div className="border-t border-white/10 p-3">
       <div className="flex items-center gap-3 px-1">
-        <div
-          aria-hidden
-          className="grid size-8 shrink-0 place-items-center rounded-full bg-white/10 text-xs font-semibold text-sidebar-fg"
-        >
-          {me.user.full_name.slice(0, 1).toUpperCase()}
-        </div>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm text-sidebar-fg">{me.user.full_name}</p>
+          <p className="truncate text-sm font-semibold text-sidebar-fg">{me.user.full_name}</p>
           <p className="truncate text-xs text-sidebar-muted">
             {membership ? [membership.job_title, ROLE_LABEL[membership.role]].filter(Boolean).join(" · ") : "No workspace"}
           </p>
@@ -187,7 +208,7 @@ function UserFooter() {
         <button
           type="button"
           onClick={logout}
-          className="rounded-md p-2 text-sidebar-muted hover:bg-white/10 hover:text-sidebar-fg"
+          className="rounded-sm p-2 text-sidebar-muted hover:bg-white/10 hover:text-white"
           aria-label="Sign out"
           title="Sign out"
         >
@@ -204,12 +225,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const sidebar = (
     <>
-      <div className="flex h-14 items-center border-b border-white/10 px-4">
+      <div className="flex h-14 items-center border-b-2 border-[#c9a24a] px-4">
         <Logo href="/app" inverted />
       </div>
-      <div className="pt-4">
-        <OrgSwitcher />
-      </div>
+      {membership && <Workspace />}
       <NavLinks onNavigate={() => setOpen(false)} />
       <UserFooter />
     </>
@@ -217,6 +236,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-dvh">
+      {membership && <BrandingApplier key={membership.organization.id} />}
       <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col bg-sidebar lg:flex print:hidden">{sidebar}</aside>
 
       {open && (
@@ -226,7 +246,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="absolute right-3 top-3.5 rounded-md p-1.5 text-sidebar-muted hover:text-sidebar-fg"
+              className="absolute right-3 top-3.5 rounded-sm p-1.5 text-sidebar-muted hover:text-white"
               aria-label="Close navigation"
             >
               <X className="size-5" />
@@ -237,16 +257,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 items-center gap-3 border-b border-border bg-bg-2 px-4 lg:hidden print:hidden">
+        <header className="flex h-14 items-center gap-3 bg-sidebar px-4 lg:hidden print:hidden">
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="rounded-md p-1.5 text-muted hover:text-fg"
+            className="rounded-sm p-1.5 text-sidebar-fg hover:bg-white/10"
             aria-label="Open navigation"
           >
             <Menu className="size-5" />
           </button>
-          <Logo href="/app" />
+          <Logo href="/app" inverted />
         </header>
         {!me.user.email_verified_at && (
           <div className="border-b border-warning/30 bg-warning/10 px-6 py-2 text-xs text-warning print:hidden">

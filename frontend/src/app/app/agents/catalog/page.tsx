@@ -80,7 +80,7 @@ export default function CatalogPage() {
   const { data, error } = useOrgData<AgentDefinition[]>("/api/v1/agents/catalog");
   return (
     <>
-      <PageHeader eyebrow="AI workforce" title="Agent catalog"
+      <PageHeader title="Agent catalog"
         description={<>Specialised AI employees you can hire. Not sure which ones you need? <Link href="/app/agents/team" className="text-accent underline underline-offset-2">See the recommended team</Link>.</>} />
       {error ? <ErrorState error={error} /> : !data ? <Spinner /> : (
         <div className="grid gap-5 md:grid-cols-2">{data.map((d) => <AgentCard key={d.key} d={d} />)}</div>

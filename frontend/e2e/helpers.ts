@@ -1,5 +1,45 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type APIRequestContext, type Page } from "@playwright/test";
+import { deflateSync } from "node:zlib";
+
+/** A small PNG logo drawn in code (no binary fixture): a brand-coloured block with a dark wordmark bar on transparency. */
+export function logoPng(rgb: [number, number, number], width = 200, height = 100): Buffer {
+  const crcTable = Array.from({ length: 256 }, (_, n) => {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    return c >>> 0;
+  });
+  const crc = (buf: Buffer) => {
+    let c = 0xffffffff;
+    for (const b of buf) c = crcTable[(c ^ b) & 0xff] ^ (c >>> 8);
+    return (c ^ 0xffffffff) >>> 0;
+  };
+  const chunk = (type: string, data: Buffer) => {
+    const len = Buffer.alloc(4);
+    len.writeUInt32BE(data.length);
+    const body = Buffer.concat([Buffer.from(type), data]);
+    const sum = Buffer.alloc(4);
+    sum.writeUInt32BE(crc(body));
+    return Buffer.concat([len, body, sum]);
+  };
+  const rows: Buffer[] = [];
+  for (let y = 0; y < height; y++) {
+    const row = Buffer.alloc(1 + width * 4);
+    for (let x = 0; x < width; x++) {
+      const inBlock = x >= 10 && x < width - 10 && y >= 10 && y < height - 10;
+      const inBar = x >= 30 && x < width - 30 && y >= 44 && y < 56;
+      const px = inBar ? [17, 17, 17, 255] : inBlock ? [...rgb, 255] : [0, 0, 0, 0];
+      row.set(px, 1 + x * 4);
+    }
+    rows.push(row);
+  }
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(width, 0);
+  ihdr.writeUInt32BE(height, 4);
+  ihdr.set([8, 6, 0, 0, 0], 8); // 8-bit RGBA
+  return Buffer.concat([Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]), chunk("IHDR", ihdr),
+    chunk("IDAT", deflateSync(Buffer.concat(rows))), chunk("IEND", Buffer.alloc(0))]);
+}
 
 // Shared setup for the execution and reporting journeys (real stack, Celery worker).
 export const HOURS = Object.fromEntries(["mon", "tue", "wed", "thu", "fri"].map((d) => [d, { open: "09:00", close: "17:00" }]));

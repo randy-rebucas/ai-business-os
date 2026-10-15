@@ -1,0 +1,1067 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-15T06:42:12+00:00",
+  "title": "Design System: AI Business OS",
+  "extensions": {
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Landing cover headline only. 44px below 640px, 64px above."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Report-scale numerals in a figure row, tabular, each with a note key. 52px below 640px, 64px above."
+      },
+      "figure-md": {
+        "displayName": "Figure (medium)",
+        "purpose": "Secondary figure rows and the landing specimen. 36px below 640px, 44px above."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page H1 under a 3px ink rule; 28px below 640px, 32px above. Landing and auth statements use 28-34px at the same weight."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Report-section headings under a 2px ink rule."
+      },
+      "title-sm": {
+        "displayName": "Title (small)",
+        "purpose": "Sheet headers and the Notes heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All working text, table cells and notes. Descriptions cap at 42rem."
+      },
+      "body-lg": {
+        "displayName": "Body (large)",
+        "purpose": "Landing and auth prose."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Button labels (16px at the lg size)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase table column heads and filter labels."
+      },
+      "label-rail": {
+        "displayName": "Rail Label",
+        "purpose": "Uppercase nav group labels on the green rail, in rail-muted."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Identifiers only (ids, codes, slugs); breaks anywhere."
+      }
+    },
+    "typeMoods": [
+      {
+        "key": "report",
+        "label": "Report",
+        "display": "Schibsted Grotesk",
+        "text": "Public Sans",
+        "default": true
+      },
+      {
+        "key": "market",
+        "label": "Market",
+        "display": "Bricolage Grotesque",
+        "text": "Figtree"
+      },
+      {
+        "key": "works",
+        "label": "Works",
+        "display": "Archivo",
+        "text": "Archivo"
+      },
+      {
+        "key": "care",
+        "label": "Care",
+        "display": "Source Serif 4",
+        "text": "Source Sans 3"
+      },
+      {
+        "key": "studio",
+        "label": "Studio",
+        "display": "Familjen Grotesk",
+        "text": "Hanken Grotesk"
+      }
+    ],
+    "shadows": [
+      {
+        "name": "specimen-lift",
+        "value": "0 24px 48px -28px rgba(18,26,24,0.35)",
+        "purpose": "Only the example report sheet on the landing cover, over the green band. Never inside the app."
+      }
+    ],
+    "rules": [
+      {
+        "name": "page-rule",
+        "value": "border-top: 3px solid var(--color-rule)",
+        "purpose": "Over the page header, figure rows, the auth sheet and the landing specimen."
+      },
+      {
+        "name": "section-rule",
+        "value": "border-top: 2px solid var(--color-rule)",
+        "purpose": "Over report sections, Notes, table heads (as bottom border) and tab strips."
+      },
+      {
+        "name": "hairline",
+        "value": "1px solid var(--color-border)",
+        "purpose": "Row dividers, figure-cell separators, sheet edges."
+      },
+      {
+        "name": "rail-brass-rule",
+        "value": "border-bottom: 2px solid #c9a24a",
+        "purpose": "Under the platform mark in the rail."
+      }
+    ],
+    "focus": [
+      {
+        "name": "focus-outline",
+        "value": "outline: 2px solid var(--color-accent); outline-offset: 2px",
+        "purpose": "Every interactive element."
+      },
+      {
+        "name": "field-focus",
+        "value": "border-color: var(--color-accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 25%, transparent)",
+        "purpose": "Inputs, selects, textareas."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Meter and progress fills (500ms) and the note-arrive flash."
+      },
+      {
+        "name": "state-transition",
+        "value": "150ms",
+        "purpose": "Button and nav colour changes; press nudges down 1px."
+      },
+      {
+        "name": "note-arrive",
+        "value": "1.8s outline-color var(--color-note) to transparent, ease-out-expo",
+        "purpose": "A followed note key outlines its note in brass. An outline, never a fill."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation/transition-duration: 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce removes all motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px",
+        "purpose": "Figure rows go multi-column; H1 and figures step up."
+      },
+      {
+        "name": "lg",
+        "value": "1024px",
+        "purpose": "Sticky 256px rail replaces the 56px top bar and 288px drawer; auth splits into two columns."
+      },
+      {
+        "name": "min-supported",
+        "value": "390px"
+      }
+    ],
+    "layout": {
+      "railWidth": "256px",
+      "drawerWidth": "288px",
+      "topBarHeight": "56px",
+      "contentMaxWidth": "72rem",
+      "contentPadding": "16px / 24px at sm / 40px at lg; 32px vertical",
+      "figureColumnMin": "11rem"
+    },
+    "tenantBranding": {
+      "mayChange": [
+        "Accent text (--brand-accent-light/-dark): brand fitted, same hue and saturation, to >= 4.5:1 against surface-2 of each theme.",
+        "Accent fill (--brand-fill-*/--brand-on-fill-*): the raw brand when ink or white text reaches 4.5:1 on it; otherwise the fitted accent.",
+        "Accent tint (--brand-accent-soft-*): 10% of the fitted accent over white (16% over the dark sheet).",
+        "Rail marker (--brand-marker): brand fitted to >= 3:1 against the rail green.",
+        "Note keys (--brand-note-*): brass, or ink when the fitted accent is within 25 degrees of hue and 0.2 lightness of brass.",
+        "Type mood (--mood-display, --mood-text): one of the five curated pairings.",
+        "Logo: on a white 40px tile in the rail's workspace block."
+      ],
+      "mayNotChange": [
+        "The rail green and its brass rule",
+        "Paper, sheet, ink and the neutrals",
+        "The four status colours",
+        "The platform mark",
+        "Radii, layout and the type scale"
+      ],
+      "source": "backend/abos/branding/colors.py, backend/abos/branding/moods.py"
+    },
+    "accessibility": {
+      "standard": "WCAG 2.1 AA, axe gate on every journey page",
+      "contrastLight": {
+        "ink-on-paper": "16.3:1",
+        "muted-on-paper": "7.4:1",
+        "subtle-on-paper": "5.9:1",
+        "subtle-on-surface-2": "5.1:1",
+        "note-brass-on-paper": "5.0:1 (keep off surface-2)",
+        "platform-accent": "5.9:1",
+        "white-on-platform-accent": "6.3:1",
+        "rail-text": "10.6:1",
+        "rail-muted": "6.6:1",
+        "rail-marker": "5.0:1"
+      },
+      "contrastDark": "Every text token >= 5.4:1 on every surface.",
+      "tenantAccents": "Derived to >= 4.5:1 (text) and >= 3:1 (rail marker) by the backend.",
+      "state": "Colour is never the only signal: badges carry glyph + word."
+    },
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f4f6f5",
+        "tonalRamp": [
+          "#0a0b0b",
+          "#242525",
+          "#414242",
+          "#606261",
+          "#818382",
+          "#a4a5a4",
+          "#c8cac9",
+          "#edefee"
+        ],
+        "cssVariable": "--color-bg"
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Sheet",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "cssVariable": "--color-bg-2"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#edf1ef",
+        "tonalRamp": [
+          "#090c0b",
+          "#232624",
+          "#404341",
+          "#5f6260",
+          "#808381",
+          "#a2a6a4",
+          "#c6cac8",
+          "#ebefed"
+        ],
+        "cssVariable": "--color-surface"
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Surface 2",
+        "canonical": "#e2e8e5",
+        "tonalRamp": [
+          "#080c0a",
+          "#222624",
+          "#3e4341",
+          "#5d6360",
+          "#7e8481",
+          "#a1a7a4",
+          "#c5cbc8",
+          "#eaf0ed"
+        ],
+        "cssVariable": "--color-surface-2"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#d3dcd8",
+        "tonalRamp": [
+          "#070d0a",
+          "#202724",
+          "#3d4441",
+          "#5b6360",
+          "#7c8581",
+          "#9fa7a4",
+          "#c3ccc8",
+          "#e8f1ed"
+        ],
+        "cssVariable": "--color-border"
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "#b4c1bc",
+        "tonalRamp": [
+          "#050d0a",
+          "#1d2824",
+          "#3a4541",
+          "#596460",
+          "#798681",
+          "#9ca8a4",
+          "#c0cdc8",
+          "#e5f2ed"
+        ],
+        "cssVariable": "--color-border-strong"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#121a18",
+        "tonalRamp": [
+          "#060d0b",
+          "#1f2725",
+          "#3b4442",
+          "#5a6461",
+          "#7b8582",
+          "#9da8a5",
+          "#c1ccc9",
+          "#e6f1ee"
+        ],
+        "cssVariable": "--color-fg / --color-rule"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#46534e",
+        "tonalRamp": [
+          "#040e0a",
+          "#1c2824",
+          "#394540",
+          "#576560",
+          "#788681",
+          "#9aa9a3",
+          "#becdc7",
+          "#e3f3ed"
+        ],
+        "cssVariable": "--color-muted"
+      },
+      "subtle": {
+        "role": "neutral",
+        "displayName": "Subtle",
+        "canonical": "#55625d",
+        "tonalRamp": [
+          "#040e0a",
+          "#1c2824",
+          "#394541",
+          "#586560",
+          "#788681",
+          "#9ba9a3",
+          "#becdc7",
+          "#e3f3ed"
+        ],
+        "cssVariable": "--color-subtle"
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Ledger Green",
+        "canonical": "#1d6b5c",
+        "tonalRamp": [
+          "#000f0b",
+          "#012c25",
+          "#014e41",
+          "#237060",
+          "#499281",
+          "#6db5a4",
+          "#91dac8",
+          "#bcffee"
+        ],
+        "cssVariable": "--color-accent",
+        "tenantOverride": "--brand-accent-light"
+      },
+      "accent-strong": {
+        "role": "primary",
+        "displayName": "Ledger Green Strong",
+        "canonical": "color-mix(in oklab, #1d6b5c 82%, #000)",
+        "tonalRamp": [
+          "#000f0b",
+          "#012c25",
+          "#014e41",
+          "#237060",
+          "#499281",
+          "#6db5a4",
+          "#91dac8",
+          "#bcffee"
+        ],
+        "cssVariable": "--color-accent-strong"
+      },
+      "accent-fill": {
+        "role": "primary",
+        "displayName": "Ledger Green Fill",
+        "canonical": "#1d6b5c",
+        "tonalRamp": [
+          "#000f0b",
+          "#012c25",
+          "#014e41",
+          "#237060",
+          "#499281",
+          "#6db5a4",
+          "#91dac8",
+          "#bcffee"
+        ],
+        "cssVariable": "--color-accent-fill",
+        "tenantOverride": "--brand-fill-light"
+      },
+      "accent-fill-strong": {
+        "role": "primary",
+        "displayName": "Ledger Green Fill Strong",
+        "canonical": "color-mix(in oklab, #1d6b5c 86%, #000)",
+        "tonalRamp": [
+          "#000f0b",
+          "#012c25",
+          "#014e41",
+          "#237060",
+          "#499281",
+          "#6db5a4",
+          "#91dac8",
+          "#bcffee"
+        ],
+        "cssVariable": "--color-accent-fill-strong"
+      },
+      "on-accent-fill": {
+        "role": "primary",
+        "displayName": "On Fill",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "cssVariable": "--color-on-accent-fill",
+        "tenantOverride": "--brand-on-fill-light"
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Ledger Tint",
+        "canonical": "#e8f0ee",
+        "tonalRamp": [
+          "#070c0b",
+          "#212725",
+          "#3d4442",
+          "#5c6361",
+          "#7d8482",
+          "#9fa7a5",
+          "#c3cbc9",
+          "#e8f0ee"
+        ],
+        "cssVariable": "--color-accent-soft",
+        "tenantOverride": "--brand-accent-soft-light"
+      },
+      "note-brass": {
+        "role": "tertiary",
+        "displayName": "Note Brass",
+        "canonical": "#8a6210",
+        "tonalRamp": [
+          "#120900",
+          "#332101",
+          "#583c02",
+          "#805902",
+          "#a37a30",
+          "#c89d55",
+          "#eec179",
+          "#ffecce"
+        ],
+        "cssVariable": "--color-note",
+        "tenantOverride": "--brand-note-light"
+      },
+      "rail-brass": {
+        "role": "tertiary",
+        "displayName": "Rail Brass",
+        "canonical": "#c9a24a",
+        "tonalRamp": [
+          "#110a00",
+          "#312301",
+          "#553e00",
+          "#7b5c04",
+          "#a27c1c",
+          "#c69f47",
+          "#ebc36c",
+          "#feedc8"
+        ],
+        "cssVariable": "--color-sidebar-accent",
+        "tenantOverride": "--brand-marker (active-nav marker only)"
+      },
+      "rail": {
+        "role": "secondary",
+        "displayName": "Report Green",
+        "canonical": "#0f3d36",
+        "tonalRamp": [
+          "#000f0c",
+          "#012c26",
+          "#1f4b43",
+          "#3f6b63",
+          "#608d84",
+          "#82b0a7",
+          "#a6d4cb",
+          "#cbfaf0"
+        ],
+        "cssVariable": "--color-sidebar"
+      },
+      "rail-2": {
+        "role": "secondary",
+        "displayName": "Report Green Active",
+        "canonical": "#1a4a42",
+        "tonalRamp": [
+          "#000f0c",
+          "#002c26",
+          "#1b4b43",
+          "#3d6b63",
+          "#5e8d84",
+          "#80b1a6",
+          "#a4d5cb",
+          "#c8fbf0"
+        ],
+        "cssVariable": "--color-sidebar-2"
+      },
+      "rail-fg": {
+        "role": "secondary",
+        "displayName": "Rail Text",
+        "canonical": "#e9f2ef",
+        "tonalRamp": [
+          "#070d0b",
+          "#202725",
+          "#3d4441",
+          "#5c6361",
+          "#7c8482",
+          "#9fa7a4",
+          "#c3cbc8",
+          "#e8f1ee"
+        ],
+        "cssVariable": "--color-sidebar-fg"
+      },
+      "rail-muted": {
+        "role": "secondary",
+        "displayName": "Rail Muted",
+        "canonical": "#a9c6be",
+        "tonalRamp": [
+          "#000f0b",
+          "#112a25",
+          "#2e4842",
+          "#4d6861",
+          "#6e8982",
+          "#90aca4",
+          "#b3d1c9",
+          "#d8f6ee"
+        ],
+        "cssVariable": "--color-sidebar-muted"
+      },
+      "info": {
+        "role": "status",
+        "displayName": "Info",
+        "canonical": "#1d5fb0",
+        "tonalRamp": [
+          "#000a21",
+          "#002350",
+          "#014084",
+          "#1e60b1",
+          "#4283d7",
+          "#65a7fe",
+          "#a6ccff",
+          "#e5f0fe"
+        ],
+        "cssVariable": "--color-info"
+      },
+      "success": {
+        "role": "status",
+        "displayName": "Success",
+        "canonical": "#0e6b4f",
+        "tonalRamp": [
+          "#000f08",
+          "#002d1f",
+          "#034f39",
+          "#1a7255",
+          "#439476",
+          "#67b898",
+          "#8cddbc",
+          "#c0ffe4"
+        ],
+        "cssVariable": "--color-success"
+      },
+      "warning": {
+        "role": "status",
+        "displayName": "Warning",
+        "canonical": "#8f5b00",
+        "tonalRamp": [
+          "#140800",
+          "#361f00",
+          "#5c3901",
+          "#865502",
+          "#ac762c",
+          "#d19951",
+          "#f7bd75",
+          "#ffebd4"
+        ],
+        "cssVariable": "--color-warning"
+      },
+      "danger": {
+        "role": "status",
+        "displayName": "Danger",
+        "canonical": "#b42335",
+        "tonalRamp": [
+          "#1f0002",
+          "#4c010d",
+          "#7f011c",
+          "#b01e32",
+          "#d94952",
+          "#ff7175",
+          "#feb2b0",
+          "#fee9e8"
+        ],
+        "cssVariable": "--color-danger"
+      },
+      "dark-paper": {
+        "role": "neutral",
+        "displayName": "Paper (dark theme)",
+        "canonical": "#0c1412",
+        "tonalRamp": [
+          "#060d0b",
+          "#1f2725",
+          "#3b4442",
+          "#5a6461",
+          "#7b8582",
+          "#9da8a5",
+          "#c1ccc9",
+          "#e6f1ee"
+        ],
+        "cssVariable": "--color-bg (prefers-color-scheme: dark)"
+      },
+      "dark-sheet": {
+        "role": "neutral",
+        "displayName": "Sheet (dark theme)",
+        "canonical": "#121c1a",
+        "tonalRamp": [
+          "#050d0b",
+          "#1d2825",
+          "#3a4542",
+          "#586462",
+          "#798583",
+          "#9ba8a5",
+          "#bfccca",
+          "#e4f2ef"
+        ],
+        "cssVariable": "--color-bg-2 (prefers-color-scheme: dark)"
+      },
+      "dark-surface": {
+        "role": "neutral",
+        "displayName": "Surface (dark theme)",
+        "canonical": "#17231f",
+        "tonalRamp": [
+          "#040e0a",
+          "#1c2824",
+          "#384541",
+          "#576560",
+          "#788681",
+          "#9aa9a4",
+          "#becdc8",
+          "#e3f3ed"
+        ],
+        "cssVariable": "--color-surface (prefers-color-scheme: dark)"
+      },
+      "dark-surface-2": {
+        "role": "neutral",
+        "displayName": "Surface 2 (dark theme)",
+        "canonical": "#1e2c28",
+        "tonalRamp": [
+          "#030e0b",
+          "#1b2824",
+          "#374641",
+          "#566560",
+          "#768782",
+          "#99a9a4",
+          "#bccec8",
+          "#e1f3ee"
+        ],
+        "cssVariable": "--color-surface-2 (prefers-color-scheme: dark)"
+      },
+      "dark-border": {
+        "role": "neutral",
+        "displayName": "Hairline (dark theme)",
+        "canonical": "#263632",
+        "tonalRamp": [
+          "#020e0b",
+          "#192925",
+          "#364642",
+          "#546661",
+          "#758782",
+          "#97aaa5",
+          "#bbcec9",
+          "#e0f4ee"
+        ],
+        "cssVariable": "--color-border (prefers-color-scheme: dark)"
+      },
+      "dark-border-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline (dark theme)",
+        "canonical": "#3a4f48",
+        "tonalRamp": [
+          "#000f0a",
+          "#162a23",
+          "#324740",
+          "#51675f",
+          "#728880",
+          "#94aba3",
+          "#b7d0c7",
+          "#dcf5ec"
+        ],
+        "cssVariable": "--color-border-strong (prefers-color-scheme: dark)"
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Ink (dark theme)",
+        "canonical": "#e8efec",
+        "tonalRamp": [
+          "#080c0a",
+          "#212624",
+          "#3e4341",
+          "#5d6360",
+          "#7e8481",
+          "#a0a7a4",
+          "#c4cbc8",
+          "#e9f0ed"
+        ],
+        "cssVariable": "--color-fg / --color-rule (prefers-color-scheme: dark)"
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Muted (dark theme)",
+        "canonical": "#a7b8b2",
+        "tonalRamp": [
+          "#030e0a",
+          "#1b2824",
+          "#374641",
+          "#566560",
+          "#768781",
+          "#99a9a4",
+          "#bccec8",
+          "#e1f3ed"
+        ],
+        "cssVariable": "--color-muted (prefers-color-scheme: dark)"
+      },
+      "dark-subtle": {
+        "role": "neutral",
+        "displayName": "Subtle (dark theme)",
+        "canonical": "#8fa29b",
+        "tonalRamp": [
+          "#020e0a",
+          "#192924",
+          "#354640",
+          "#54665f",
+          "#758780",
+          "#97aaa3",
+          "#bbcec7",
+          "#e0f4ec"
+        ],
+        "cssVariable": "--color-subtle (prefers-color-scheme: dark)"
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "Ledger Green (dark theme)",
+        "canonical": "#6fd1b6",
+        "tonalRamp": [
+          "#000f0a",
+          "#012d23",
+          "#024e3f",
+          "#03725d",
+          "#2e967d",
+          "#57baa0",
+          "#7ddfc4",
+          "#bdffea"
+        ],
+        "cssVariable": "--color-accent (prefers-color-scheme: dark)",
+        "tenantOverride": "--brand-accent-dark / --brand-fill-dark"
+      },
+      "dark-accent-soft": {
+        "role": "primary",
+        "displayName": "Ledger Tint (dark theme)",
+        "canonical": "#1a332d",
+        "tonalRamp": [
+          "#000f0b",
+          "#112a25",
+          "#2f4841",
+          "#4d6861",
+          "#6e8982",
+          "#90aca4",
+          "#b3d1c8",
+          "#d8f6ee"
+        ],
+        "cssVariable": "--color-accent-soft (prefers-color-scheme: dark)",
+        "tenantOverride": "--brand-accent-soft-dark"
+      },
+      "dark-note-brass": {
+        "role": "tertiary",
+        "displayName": "Note Brass (dark theme)",
+        "canonical": "#d9b25e",
+        "tonalRamp": [
+          "#110a00",
+          "#312200",
+          "#553e02",
+          "#7b5c02",
+          "#a17c22",
+          "#c69f4b",
+          "#ebc370",
+          "#ffedc7"
+        ],
+        "cssVariable": "--color-note (prefers-color-scheme: dark)",
+        "tenantOverride": "--brand-note-dark"
+      },
+      "dark-rail": {
+        "role": "secondary",
+        "displayName": "Report Green (dark theme)",
+        "canonical": "#0a2a25",
+        "tonalRamp": [
+          "#000f0c",
+          "#0b2b26",
+          "#2a4943",
+          "#496962",
+          "#698a84",
+          "#8cada6",
+          "#afd2ca",
+          "#d4f7f0"
+        ],
+        "cssVariable": "--color-sidebar (prefers-color-scheme: dark)"
+      },
+      "dark-rail-2": {
+        "role": "secondary",
+        "displayName": "Report Green Active (dark theme)",
+        "canonical": "#12352f",
+        "tonalRamp": [
+          "#000f0c",
+          "#072c26",
+          "#274943",
+          "#466962",
+          "#678b83",
+          "#89aea6",
+          "#acd3ca",
+          "#d1f8f0"
+        ],
+        "cssVariable": "--color-sidebar-2 (prefers-color-scheme: dark)"
+      },
+      "dark-info": {
+        "role": "status",
+        "displayName": "Info (dark theme)",
+        "canonical": "#7cb7ff",
+        "tonalRamp": [
+          "#000b1f",
+          "#00244d",
+          "#004180",
+          "#2962a4",
+          "#4b85c9",
+          "#6ea8ef",
+          "#a4cdff",
+          "#e4f0fe"
+        ],
+        "cssVariable": "--color-info (prefers-color-scheme: dark)"
+      },
+      "dark-success": {
+        "role": "status",
+        "displayName": "Success (dark theme)",
+        "canonical": "#4fd1a5",
+        "tonalRamp": [
+          "#000f08",
+          "#012d20",
+          "#004f39",
+          "#067355",
+          "#059973",
+          "#38bf94",
+          "#65e4b7",
+          "#bfffe4"
+        ],
+        "cssVariable": "--color-success (prefers-color-scheme: dark)"
+      },
+      "dark-warning": {
+        "role": "status",
+        "displayName": "Warning (dark theme)",
+        "canonical": "#f5c065",
+        "tonalRamp": [
+          "#120900",
+          "#332100",
+          "#583c00",
+          "#7f5905",
+          "#aa7807",
+          "#ce9b3d",
+          "#f4bf64",
+          "#ffecce"
+        ],
+        "cssVariable": "--color-warning (prefers-color-scheme: dark)"
+      },
+      "dark-danger": {
+        "role": "status",
+        "displayName": "Danger (dark theme)",
+        "canonical": "#f58a97",
+        "tonalRamp": [
+          "#1e0005",
+          "#4b0116",
+          "#77172e",
+          "#9d3b4c",
+          "#c35e6c",
+          "#ea818e",
+          "#feb1b8",
+          "#fee8ea"
+        ],
+        "cssVariable": "--color-danger (prefers-color-scheme: dark)"
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one decisive action on a view; wears the tenant's brand fill when it can carry text.",
+      "html": "<button class=\"ds-btn-primary\">Approve this action</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 16px; border: none; border-radius: 2px; background: var(--color-accent-fill, #1d6b5c); color: var(--color-on-accent-fill, #ffffff); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); font: 600 14px/1.43 'Public Sans', ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background-color 150ms, transform 150ms; } .ds-btn-primary:hover { background: var(--color-accent-fill-strong, color-mix(in oklab, #1d6b5c 86%, #000)); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-accent, #1d6b5c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Supporting actions; white sheet with a strong hairline that sharpens to ink on hover.",
+      "html": "<button class=\"ds-btn-secondary\">Upload logo</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid var(--color-border-strong, #b4c1bc); border-radius: 2px; background: var(--color-bg-2, #ffffff); color: var(--color-fg, #121a18); font: 600 14px/1.43 'Public Sans', ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: border-color 150ms, transform 150ms; } .ds-btn-secondary:hover { border-color: var(--color-rule, #121a18); } .ds-btn-secondary:active { transform: translateY(1px); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-accent, #1d6b5c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Low-emphasis actions; no edge until hover.",
+      "html": "<button class=\"ds-btn-ghost\">Remove</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border: none; border-radius: 2px; background: transparent; color: var(--color-muted, #46534e); font: 600 14px/1.43 'Public Sans', ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background-color 150ms, color 150ms; } .ds-btn-ghost:hover { background: var(--color-surface, #edf1ef); color: var(--color-fg, #121a18); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--color-accent, #1d6b5c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Label above, 36px control, hint or error below.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Hex</span><input class=\"ds-input\" value=\"#1d6b5c\" /><span class=\"ds-field-hint\">Used for buttons, links and focus.</span></label>",
+      "css": ".ds-field { display: grid; gap: 6px; font-family: 'Public Sans', ui-sans-serif, system-ui, sans-serif; } .ds-field-label { font-size: 14px; font-weight: 500; color: var(--color-fg, #121a18); } .ds-field-hint { font-size: 12px; color: var(--color-muted, #46534e); } .ds-input { height: 36px; padding: 0 12px; border: 1px solid var(--color-border-strong, #b4c1bc); border-radius: 2px; background: var(--color-bg-2, #ffffff); color: var(--color-fg, #121a18); font: 400 14px 'Public Sans', ui-sans-serif, system-ui, sans-serif; } .ds-input::placeholder { color: var(--color-subtle, #55625d); } .ds-input:hover { border-color: var(--color-subtle, #55625d); } .ds-input:focus-visible { outline: none; border-color: var(--color-accent, #1d6b5c); box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent, #1d6b5c) 25%, transparent); } .ds-input[aria-invalid=true] { border-color: var(--color-danger, #b42335); }"
+    },
+    {
+      "name": "Status Badges",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "State is glyph + word, never hue alone: check, dashed circle, struck circle.",
+      "html": "<span class=\"ds-badge ds-badge-success\"><svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg>Completed</span> <span class=\"ds-badge ds-badge-warning\"><svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M10.1 2.18a9.93 9.93 0 0 1 3.8 0\"/><path d=\"M17.6 3.71a9.95 9.95 0 0 1 2.69 2.7\"/><path d=\"M21.82 10.1a9.93 9.93 0 0 1 0 3.8\"/><path d=\"M20.29 17.6a9.95 9.95 0 0 1-2.7 2.69\"/><path d=\"M13.9 21.82a9.94 9.94 0 0 1-3.8 0\"/><path d=\"M6.4 20.29a9.95 9.95 0 0 1-2.69-2.7\"/><path d=\"M2.18 13.9a9.93 9.93 0 0 1 0-3.8\"/><path d=\"M3.71 6.4a9.95 9.95 0 0 1 2.7-2.69\"/></svg>Awaiting approval</span> <span class=\"ds-badge ds-badge-danger\"><svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m4.9 4.9 14.2 14.2\"/></svg>Refused</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border: 1px solid; border-radius: 2px; font: 600 12px/1.33 'Public Sans', ui-sans-serif, system-ui, sans-serif; white-space: nowrap; } .ds-badge-success { color: var(--color-success, #0e6b4f); border-color: color-mix(in srgb, var(--color-success, #0e6b4f) 35%, transparent); background: color-mix(in srgb, var(--color-success, #0e6b4f) 10%, transparent); } .ds-badge-warning { color: var(--color-warning, #8f5b00); border-color: color-mix(in srgb, var(--color-warning, #8f5b00) 35%, transparent); background: color-mix(in srgb, var(--color-warning, #8f5b00) 10%, transparent); } .ds-badge-danger { color: var(--color-danger, #b42335); border-color: color-mix(in srgb, var(--color-danger, #b42335) 35%, transparent); background: color-mix(in srgb, var(--color-danger, #b42335) 10%, transparent); }"
+    },
+    {
+      "name": "Sheet",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "A white sheet on the paper ground: hairline edge, no shadow, title-sm header over a hairline.",
+      "html": "<section class=\"ds-sheet\"><div class=\"ds-sheet-head\"><h2>Branding</h2><p>Your logo, an accent drawn from it, and a typeface that suits your business.</p></div><div class=\"ds-sheet-body\">Sheet content.</div></section>",
+      "css": ".ds-sheet { border: 1px solid var(--color-border, #d3dcd8); border-radius: 2px; background: var(--color-bg-2, #ffffff); color: var(--color-fg, #121a18); font-family: 'Public Sans', ui-sans-serif, system-ui, sans-serif; } .ds-sheet-head { padding: 14px 20px; border-bottom: 1px solid var(--color-border, #d3dcd8); } .ds-sheet-head h2 { margin: 0; font: 700 15px/1.4 'Schibsted Grotesk', 'Public Sans', sans-serif; letter-spacing: -0.025em; } .ds-sheet-head p { margin: 2px 0 0; font-size: 12px; color: var(--color-muted, #46534e); } .ds-sheet-body { padding: 20px; font-size: 14px; }"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "rail-nav-item",
+      "description": "The green rail: tracked group label, items with a square marker; the active item wears the tenant's marker colour.",
+      "html": "<nav class=\"ds-rail\" aria-label=\"Main\"><p class=\"ds-rail-group\">Daily review</p><a class=\"ds-rail-item\" href=\"#\"><span class=\"ds-rail-marker\"></span>Overview</a><a class=\"ds-rail-item is-active\" href=\"#\" aria-current=\"page\"><span class=\"ds-rail-marker\"></span>Control Center</a><a class=\"ds-rail-item\" href=\"#\"><span class=\"ds-rail-marker\"></span>Approval inbox</a></nav>",
+      "css": ".ds-rail { width: 256px; padding: 16px 12px; background: var(--color-sidebar, #0f3d36); font-family: 'Public Sans', ui-sans-serif, system-ui, sans-serif; } .ds-rail-group { margin: 0; padding: 0 12px 6px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-sidebar-muted, #a9c6be); } .ds-rail-item { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 2px; font-size: 14px; color: color-mix(in srgb, var(--color-sidebar-fg, #e9f2ef) 85%, transparent); text-decoration: none; transition: background-color 150ms, color 150ms; } .ds-rail-item:hover { background: rgba(255,255,255,0.05); color: #ffffff; } .ds-rail-item:focus-visible { outline: 2px solid var(--color-accent, #1d6b5c); outline-offset: 2px; } .ds-rail-item.is-active { background: var(--color-sidebar-2, #1a4a42); color: #ffffff; font-weight: 600; } .ds-rail-marker { width: 6px; height: 6px; flex-shrink: 0; background: transparent; } .ds-rail-item.is-active .ds-rail-marker { background: var(--color-sidebar-accent, #c9a24a); }"
+    },
+    {
+      "name": "Page Header",
+      "kind": "custom",
+      "refersTo": "page-header",
+      "description": "Every page opens under a 3px ink rule: H1, then the context line beneath it, then a capped description.",
+      "html": "<header class=\"ds-page-head\"><h1>Control Center</h1><div class=\"ds-page-context\">Oct 9, 2026 – Oct 15, 2026 · Asia/Manila</div><p>Everything your AI employees did, counted from their execution records.</p></header>",
+      "css": ".ds-page-head { border-top: 3px solid var(--color-rule, #121a18); padding-top: 16px; font-family: 'Public Sans', ui-sans-serif, system-ui, sans-serif; color: var(--color-fg, #121a18); } .ds-page-head h1 { margin: 0; font: 800 32px/1.25 'Schibsted Grotesk', 'Public Sans', sans-serif; letter-spacing: -0.015em; } .ds-page-context { margin-top: 4px; font-size: 14px; font-weight: 500; color: var(--color-subtle, #55625d); } .ds-page-head p { margin: 8px 0 0; max-width: 42rem; font-size: 14px; color: var(--color-muted, #46534e); }"
+    },
+    {
+      "name": "Figures and Notes",
+      "kind": "custom",
+      "refersTo": "figure-value",
+      "description": "The signature move: report-scale figures under an ink rule, each with a brass note key that jumps to a note naming its evidence.",
+      "html": "<div class=\"ds-report\"><dl class=\"ds-figures\"><div class=\"ds-figure\"><dt>Tasks completed</dt><dd><span class=\"ds-figure-value\">41<a class=\"ds-note-key\" href=\"#ds-note-1\" aria-label=\"Note 1\">1</a></span><p>of 44 runs</p></dd></div><div class=\"ds-figure\"><dt>Waiting for a decision</dt><dd><span class=\"ds-figure-value is-warning\">2<a class=\"ds-note-key\" href=\"#ds-note-2\" aria-label=\"Note 2\">2</a></span><p>1 held action · 1 run paused</p></dd></div></dl><section class=\"ds-notes\" aria-label=\"Notes\"><h2>Notes</h2><ol><li id=\"ds-note-1\"><span>1</span><p>Counted from 44 runs; a task counts as completed only when every check passed. <a href=\"#\">Open tasks &amp; runs</a></p></li><li id=\"ds-note-2\"><span>2</span><p>Held actions wait for someone allowed to approve them. <a href=\"#\">Open the approval inbox</a></p></li></ol></section></div>",
+      "css": ".ds-report { font-family: 'Public Sans', ui-sans-serif, system-ui, sans-serif; color: var(--color-fg, #121a18); } .ds-figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); margin: 0; border-top: 3px solid var(--color-rule, #121a18); } .ds-figure { padding: 16px 24px 16px 0; border-bottom: 1px solid var(--color-border, #d3dcd8); } .ds-figure + .ds-figure { padding-left: 24px; border-left: 1px solid var(--color-border, #d3dcd8); } .ds-figure dt { font-size: 14px; font-weight: 600; } .ds-figure dd { margin: 6px 0 0; } .ds-figure dd p { margin: 8px 0 0; font-size: 12px; color: var(--color-muted, #46534e); } .ds-figure-value { font: 800 64px/1 'Schibsted Grotesk', 'Public Sans', sans-serif; letter-spacing: -0.025em; font-variant-numeric: tabular-nums; } .ds-figure-value.is-warning { color: var(--color-warning, #8f5b00); } .ds-note-key { margin-left: 0.08em; vertical-align: super; font-size: 0.3em; font-weight: 700; line-height: 0; color: var(--color-note, #8a6210); text-decoration: none; } .ds-note-key:hover { text-decoration: underline; } .ds-note-key:focus-visible { outline: 2px solid var(--color-accent, #1d6b5c); outline-offset: 2px; } .ds-notes { margin-top: 24px; padding-top: 12px; border-top: 2px solid var(--color-rule, #121a18); } .ds-notes h2 { margin: 0; font: 700 15px/1.4 'Schibsted Grotesk', 'Public Sans', sans-serif; letter-spacing: -0.025em; } .ds-notes ol { margin: 8px 0 0; padding: 0; list-style: none; } .ds-notes li { display: grid; grid-template-columns: 1.5rem 1fr; gap: 8px; padding: 10px 0; font-size: 14px; border-top: 1px solid var(--color-border, #d3dcd8); } .ds-notes li:first-child { border-top: none; } .ds-notes li > span { font-weight: 700; color: var(--color-note, #8a6210); } .ds-notes li p { margin: 0; color: var(--color-muted, #46534e); } .ds-notes a { font-weight: 600; color: var(--color-accent, #1d6b5c); text-underline-offset: 3px; } .ds-notes li:target { animation: ds-note-arrive 1.8s cubic-bezier(0.16, 1, 0.3, 1); outline: 2px solid transparent; outline-offset: 2px; } @keyframes ds-note-arrive { from { outline-color: var(--color-note, #8a6210); } to { outline-color: transparent; } }"
+    },
+    {
+      "name": "Capacity Meter",
+      "kind": "custom",
+      "refersTo": "capacity",
+      "description": "A quantity against a hard limit: the fill stops at an ink end mark; at the limit it turns danger and says so.",
+      "html": "<div class=\"ds-capacity\"><div class=\"ds-capacity-track\" role=\"meter\" aria-label=\"AI spend\" aria-valuenow=\"126\" aria-valuemin=\"0\" aria-valuemax=\"300\"><div class=\"ds-capacity-fill\" style=\"width:42%\"></div><span class=\"ds-capacity-end\"></span></div><p>126.00 USD of 300.00 USD · 42%</p></div>",
+      "css": ".ds-capacity { display: grid; gap: 4px; font-family: 'Public Sans', ui-sans-serif, system-ui, sans-serif; } .ds-capacity-track { position: relative; height: 8px; background: var(--color-surface-2, #e2e8e5); } .ds-capacity-fill { height: 100%; background: var(--color-accent, #1d6b5c); transition: width 500ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-capacity-end { position: absolute; top: -4px; right: 0; width: 2px; height: 16px; background: var(--color-rule, #121a18); } .ds-capacity p { margin: 0; font-size: 12px; color: var(--color-muted, #46534e); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Annual Report",
+    "overview": "Agent output is set like an audited annual report. A deep green rail holds the platform's chrome; the working area is cool paper with white sheets laid on it; heavy ink rules, not boxes, mark where a section, a figure row or a table begins. Figures are printed at report scale in a grotesk display face, and each one carries a small brass note key. Following the key opens a numbered note that says how the figure was counted and links to the records it came from. The figure is the claim and the note is the evidence; the whole system is built so neither appears without the other.\n\nDensity is operational, not decorative: 14px body text, tight row rhythm, tabular numerals everywhere numbers line up. Hierarchy comes from scale contrast (64px figures against 14px notes), ink weight and position, never from shadows or colour washes. State is always a glyph plus a word, so the report stays legible in greyscale and to anyone who cannot rely on hue.\n\nThe world is deliberately the opposite of the category default: no grid of identical white KPI cards, no indigo accent, no pill badges. It is also a white-label host. A workspace wears its own logo, an accent derived from that logo and one of five type moods, while the shell green, the brass, the ink rules and every status colour stay the platform's, so governance signals read the same in every company.",
+    "keyCharacteristics": [
+      "Deep report-green rail (`rail`) with a brass rule under the platform mark and a brass square marking the active page.",
+      "Cool paper ground, white sheets, ink (`ink`) text and rules; 3px ink rules over page titles and figure rows, 2px over sections, table heads, tabs and notes.",
+      "Report-scale figures (Schibsted Grotesk 800, tabular) with superscript brass note keys and a Notes list keyed 1…n.",
+      "Square-ish corners (2–4px), flat surfaces, no shadows inside the app.",
+      "States carry glyph + word; quantities against hard limits are capacity meters with an ink end mark.",
+      "Tenant branding swaps accent and type mood only, within contrast rules enforced by the backend."
+    ],
+    "rules": [
+      {
+        "name": "The Two Accents Rule",
+        "body": "Filled controls wear the brand itself when it can carry text at 4.5:1; links, focus and caret always use the contrast-fitted accent. Never use `accent-fill` as a text colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Constant Signals Rule",
+        "body": "Status hues, the green shell and the brass rule are the platform's in every workspace. A tenant accent never stands in for success, warning or danger.",
+        "section": "colors"
+      },
+      {
+        "name": "The Brass Is for Notes Rule",
+        "body": "Brass marks evidence: note keys, note numbers and the platform mark. It is never a button, link or decoration colour. Keep `note-brass` text on `paper` or `sheet` (5.0:1 on paper), never on `surface-2`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Report Scale Rule",
+        "body": "A headline figure is a numeral at report scale with a note key, set in a ruled figure row. It is never a number inside an identical white card.",
+        "section": "typography"
+      },
+      {
+        "name": "The Moods Swap Faces, Not Scale Rule",
+        "body": "A type mood replaces the two families and nothing else; sizes, weights, tracking and the hierarchy above are fixed.",
+        "section": "typography"
+      },
+      {
+        "name": "The Context Below Rule",
+        "body": "The period, department or time-zone line sits directly under the H1 (14px, 500, `subtle`), never as a label above the title.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ink, Not Shadow Rule",
+        "body": "A unit of the report is announced by an ink rule above it, not by a box, a border all round or a shadow beneath it.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Note Arrives Rule",
+        "body": "A followed note key outlines its note in brass for 1.8s (2px outline, offset 2px, fading to transparent on the expo ease-out). An outline, not a fill: a tinted background would lower the contrast of the links inside the note. Reduced-motion users get the jump without the flash.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** start every page with the ink-ruled PageHeader: H1 at 28/32px 800, the context line beneath it, description capped at 42rem.",
+      "**Do** put headline numbers in a Figures row with a NoteKey and a matching Notes entry that links to real records.",
+      "**Do** pair every status colour with a glyph and a word, using the Badge recipe.",
+      "**Do** show quantities against hard limits (budgets, daily runs) as a Capacity meter with its ink end mark.",
+      "**Do** read action colour from `accent-fill` / `on-accent-fill` and text-accent colour from `accent`, so tenant branding flows through.",
+      "**Do** keep every text pairing at 4.5:1 or better: light ink 16.3:1 on paper, muted 7.4:1, subtle 5.9:1 (5.1:1 on surface-2), note brass 5.0:1 on paper, platform accent 5.9:1 with white on it at 6.3:1, rail text 10.6:1, rail muted 6.6:1, rail marker 5.0:1; in dark mode every text token is at least 5.4:1 on every surface.",
+      "**Do** keep the 2px accent focus outline (offset 2px) on every interactive element."
+    ],
+    "donts": [
+      "**Don't** build grids of identical white KPI cards, use an indigo accent, or use pill-shaped badges.",
+      "**Don't** put shadows on app surfaces; the specimen sheet on the landing cover is the only lift.",
+      "**Don't** use brass for buttons, links or decoration, or set brass note text on `surface-2`.",
+      "**Don't** let a tenant accent recolour status, the rail, the brass rule or the platform mark.",
+      "**Don't** set a label or eyebrow above a page title; context goes under the H1.",
+      "**Don't** convey state by hue alone.",
+      "**Don't** round corners past 4px."
+    ]
+  }
+}

@@ -100,7 +100,7 @@ export default function AskPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Knowledge" title="Ask the knowledge base"
+      <PageHeader title="Ask the knowledge base"
         description="Answers come only from approved company documents, with the exact passages they rely on. If the documents don't cover it, you'll be told." />
       {status?.llm.dev_adapter && (
         <Alert tone="info" className="mb-4" title="Development mode">

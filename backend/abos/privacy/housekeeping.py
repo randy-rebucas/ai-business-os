@@ -98,7 +98,8 @@ def delete_organization(org_id: uuid.UUID, now: datetime) -> bool:
             return False
         keys = [r[0] for r in conn.execute(text(
             "SELECT storage_key FROM document_versions WHERE organization_id = :id UNION "
-            "SELECT storage_key FROM org_exports WHERE organization_id = :id AND storage_key IS NOT NULL"),
+            "SELECT storage_key FROM org_exports WHERE organization_id = :id AND storage_key IS NOT NULL UNION "
+            "SELECT logo_key FROM workspace_branding WHERE organization_id = :id AND logo_key IS NOT NULL"),
             {"id": org_id})]
         counts = _counts(conn, org_id)
         counts["audit_events_detached"] = counts.pop("audit_events", 0)

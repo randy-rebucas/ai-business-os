@@ -1,59 +1,80 @@
 @import "tailwindcss";
 
-/* Design tokens. Light by default (executive dashboards are read in daylight), dark via prefers-color-scheme.
-   Contrast (light): fg on bg 16:1, muted on bg 7.1:1, subtle on bg 5.3:1 and on surface 4.9:1 (darkened from #66707f
-   after axe measured 4.46:1 on surface), accent on bg 8.6:1, white on accent 8.6:1. */
+/* AI Business OS — "The Annual Report" (DESIGN.md, ADR-035). Agent output is set like an audited report: a deep green
+   rail, cool paper ground, white sheets, ink rules over figure rows and table heads, grotesk numerals at report scale and
+   brass note keys that open the evidence behind a figure.
+
+   Tenant branding (Settings → Branding) overrides only --brand-* (accent, its text colour and tint, the rail marker) and
+   --mood-* (display/text faces), set on <html> at runtime. Status colours and the shell are never tenant-controlled.
+   Contrast (light): fg 16.3:1 on bg, muted 7.4:1, subtle 5.9:1 (5.1:1 on surface-2), note 5.0:1 on bg (keep it off
+   surface-2), platform accent 5.9:1 and white on it 6.3:1, rail text 10.6:1 / muted 6.6:1 / marker 5.0:1.
+   Dark: every text token ≥ 5.4:1 on every surface. Tenant accents are derived to ≥ 4.5:1 by the backend. */
 @theme {
-  --color-bg: #f6f7f9;
+  --color-bg: #f4f6f5;
   --color-bg-2: #ffffff;
-  --color-surface: #f0f2f5;
-  --color-surface-2: #e7eaef;
-  --color-border: #dde1e7;
-  --color-border-strong: #c3c9d2;
-  --color-accent: #4338ca;
-  --color-accent-strong: #3730a3;
-  --color-accent-soft: #eef0ff;
+  --color-surface: #edf1ef;
+  --color-surface-2: #e2e8e5;
+  --color-border: #d3dcd8;
+  --color-border-strong: #b4c1bc;
+  --color-rule: #121a18; /* the report's heavy ink rules */
+  --color-accent: var(--brand-accent-light, #1d6b5c);
+  --color-accent-strong: color-mix(in oklab, var(--color-accent) 82%, #000);
+  --color-accent-soft: var(--brand-accent-soft-light, #e8f0ee);
+  --color-on-accent: var(--brand-on-light, #ffffff);
+  /* Filled controls wear the brand colour itself whenever it can carry ink or white text (a yellow logo → yellow
+     buttons with ink text); --color-accent stays the contrast-fitted tone for links and focus. */
+  --color-accent-fill: var(--brand-fill-light, #1d6b5c);
+  --color-accent-fill-strong: color-mix(in oklab, var(--color-accent-fill) 86%, #000);
+  --color-on-accent-fill: var(--brand-on-fill-light, #ffffff);
+  --color-note: var(--brand-note-light, #8a6210); /* brass note keys; ink when a tenant accent is brass-like */
   --color-info: #1d5fb0;
-  --color-success: #0e6b4f; /* ≥ 4.5:1 on its own 10% tint over the page background */
+  --color-success: #0e6b4f;
   --color-warning: #8f5b00;
   --color-danger: #b42335;
-  --color-fg: #111827;
-  --color-muted: #4b5563;
-  --color-subtle: #5d6674;
-  --color-on-accent: #ffffff;
-  --color-sidebar: #12141c;
-  --color-sidebar-fg: #e4e7ee;
-  --color-sidebar-muted: #9aa3b5;
-  --color-sidebar-accent: #a5b4fc; /* 8.9:1 on --color-sidebar */
+  --color-fg: #121a18;
+  --color-muted: #46534e;
+  --color-subtle: #55625d;
+  --color-sidebar: #0f3d36;
+  --color-sidebar-2: #1a4a42;
+  --color-sidebar-fg: #e9f2ef;
+  --color-sidebar-muted: #a9c6be;
+  --color-sidebar-accent: var(--brand-marker, #c9a24a);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--mood-text, var(--font-report-text)), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--mood-display, var(--font-report-display)), var(--font-sans);
   --font-mono: var(--font-jetbrains), ui-monospace, "Cascadia Mono", monospace;
 
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 10px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0e1016;
-    --color-bg-2: #151821;
-    --color-surface: #1b1f2a;
-    --color-surface-2: #232837;
-    --color-border: #2a3040;
-    --color-border-strong: #3a4256;
-    --color-accent: #a5b4fc;
-    --color-accent-strong: #c7d2fe;
-    --color-accent-soft: #1e2140;
+    --color-bg: #0c1412;
+    --color-bg-2: #121c1a;
+    --color-surface: #17231f;
+    --color-surface-2: #1e2c28;
+    --color-border: #263632;
+    --color-border-strong: #3a4f48;
+    --color-rule: #e8efec;
+    --color-accent: var(--brand-accent-dark, #6fd1b6);
+    --color-accent-soft: var(--brand-accent-soft-dark, #1a332d);
+    --color-on-accent: var(--brand-on-dark, #0c1412);
+    --color-accent-fill: var(--brand-fill-dark, #6fd1b6);
+    --color-on-accent-fill: var(--brand-on-fill-dark, #0c1412);
+    --color-note: var(--brand-note-dark, #d9b25e);
     --color-info: #7cb7ff;
     --color-success: #4fd1a5;
     --color-warning: #f5c065;
     --color-danger: #f58a97;
-    --color-fg: #eceff5;
-    --color-muted: #a8b0c0;
-    --color-subtle: #8a93a6;
-    --color-on-accent: #13163a;
-    --color-sidebar: #0a0c11;
+    --color-fg: #e8efec;
+    --color-muted: #a7b8b2;
+    --color-subtle: #8fa29b;
+    --color-sidebar: #0a2a25;
+    --color-sidebar-2: #12352f;
   }
 }
 
@@ -72,9 +93,35 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Browser surfaces carry the design too. */
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-fg);
+}
+
+input,
+textarea {
+  caret-color: var(--color-accent);
+}
+
+html {
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+a {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+table,
+.figure-value,
+time {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Identifiers (ids, codes, slugs) must never break layouts. */
@@ -82,6 +129,23 @@ body {
   font-family: var(--font-mono);
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+/* The signature move: a followed note key rules its note in brass for a moment. An outline, not a fill — a tinted
+   background would lower the contrast of the links inside the note. */
+:target.report-note {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  animation: note-arrive 1.8s var(--ease-out-expo);
+}
+
+@keyframes note-arrive {
+  from {
+    outline-color: var(--color-note);
+  }
+  to {
+    outline-color: transparent;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

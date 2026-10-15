@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Check, Pause, Play, Rocket, ShieldCheck, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Pause, Play, Rocket, ShieldCheck, X } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -24,6 +24,31 @@ function describe(err: unknown): string {
     if (items.length) return `${err.message}: ${items.map((d) => `${d.label} — ${d.detail}`).join("; ")}`;
   }
   return errorMessage(err);
+}
+
+const NEXT: Record<string, { step: string; unlocks: string }> = {
+  approved: { step: "Get the current configuration approved by the owner.", unlocks: "readiness testing" },
+  tested: { step: "Run the readiness tests on this exact configuration.", unlocks: "a pass or fail verdict" },
+  passed: { step: "Fix what the last run failed — its suggestions can be applied as a new version.", unlocks: "activation" },
+  policy: { step: "Re-run the tests: confirmed business rules changed since the last run.", unlocks: "resuming or widening" },
+  coverage: { step: "Re-run the tests: required scenarios were added or updated.", unlocks: "activation" },
+};
+
+/** Only the next decision ahead, and what it unlocks — not the whole map. */
+function NextStep({ gate, status, stage }: { gate: Readiness; status: string; stage: string | null }) {
+  const blocker = gate.items.find((i) => !i.ok);
+  const next = blocker ? NEXT[blocker.key] ?? { step: blocker.detail, unlocks: "activation" }
+    : status === "ready_for_deployment" ? { step: "Activate in observation mode.", unlocks: "real, read-only work with evidence" }
+      : status === "active" && stage === "observation" ? { step: "When the observation period is over, give it full approved permissions.", unlocks: "its approved actions" }
+        : status === "paused" ? { step: "Resume the agent.", unlocks: "its scheduled work" } : null;
+  if (!next) return null;
+  return (
+    <section aria-label="Next step" className="mb-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-y-2 border-rule py-3">
+      <ArrowRight aria-hidden className="size-4 self-center text-accent" />
+      <h2 className="font-display text-base font-bold">{next.step}</h2>
+      <p className="text-sm text-muted">Unlocks {next.unlocks}.</p>
+    </section>
+  );
 }
 
 export default function ReadinessPage() {
@@ -64,13 +89,14 @@ export default function ReadinessPage() {
   return (
     <>
       <Link href={`/app/agents/${id}`} className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-fg"><ArrowLeft className="size-4" /> {agent.name}</Link>
-      <PageHeader eyebrow="Deployment readiness" title={`Is ${agent.name} ready?`}
+      <PageHeader title={`Is ${agent.name} ready?`}
         description="An agent is tested against business scenarios in a sandbox before it may act. Activation is your decision and always starts in observation mode."
         actions={<>
           <LifecycleBadge status={agent.status} />
           {agent.deployment_stage && <Badge tone={agent.deployment_stage === "full" ? "success" : "info"}>{agent.deployment_stage === "full" ? "Full permissions" : "Observation mode"}</Badge>}
         </>} />
       {error && <Alert tone="danger" className="mb-6">{error}</Alert>}
+      <NextStep gate={gate} status={agent.status} stage={agent.deployment_stage} />
       <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
         <Card>
           <CardHeader title="Readiness checklist" description={gate.ready ? "All conditions are met." : "Every item must pass before activation."}

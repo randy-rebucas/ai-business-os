@@ -162,7 +162,6 @@ export default function DocumentsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Knowledge"
         title="Documents"
         description="Company documents your AI employees can learn from. Each one is read, split into sections and indexed, then waits for your review before anything can use it."
       />

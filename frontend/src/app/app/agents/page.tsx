@@ -23,7 +23,7 @@ export default function AgentDirectoryPage() {
   );
   return (
     <>
-      <PageHeader eyebrow="AI workforce" title="Agent directory" actions={actions}
+      <PageHeader title="Agent directory" actions={actions}
         description="Every AI employee hired into this workspace, where it is in its lifecycle, and its current configuration." />
       {error ? <ErrorState error={error} /> : !data ? <Spinner /> : data.length === 0 ? (
         <EmptyState icon={Bot} title="No AI employees yet"

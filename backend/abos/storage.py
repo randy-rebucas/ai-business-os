@@ -14,7 +14,7 @@ from typing import Protocol
 
 from abos.core.config import get_settings
 
-_KEY = re.compile(r"^[0-9a-f-]{36}/([0-9a-f-]{36}/v\d+|exports/[0-9a-f-]{36}\.zip)$")
+_KEY = re.compile(r"^[0-9a-f-]{36}/([0-9a-f-]{36}/v\d+|exports/[0-9a-f-]{36}\.zip|branding/[0-9a-f-]{36}\.png)$")
 
 
 def object_key(org_id: uuid.UUID, document_id: uuid.UUID, version_no: int) -> str:
@@ -23,6 +23,10 @@ def object_key(org_id: uuid.UUID, document_id: uuid.UUID, version_no: int) -> st
 
 def export_key(org_id: uuid.UUID, export_id: uuid.UUID) -> str:
     return f"{org_id}/exports/{export_id}.zip"
+
+
+def branding_key(org_id: uuid.UUID, file_id: uuid.UUID) -> str:
+    return f"{org_id}/branding/{file_id}.png"
 
 
 class Storage(Protocol):

@@ -1,0 +1,20 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Centre rail — Daily report</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Alegreya+Sans+SC:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}body{width:1440px;height:900px;overflow:hidden;font:17px/1.5 "Libre Caslon Text",serif;color:#1a1a1a;background:#f1ece0}
+nav{position:absolute;left:40px;top:40px;width:180px;font:500 14px "Alegreya Sans SC";letter-spacing:.06em;line-height:2}nav b{color:#c43d1f}
+.page{position:absolute;left:300px;top:40px;width:840px}.h{font:500 14px "Alegreya Sans SC";letter-spacing:.1em;border-bottom:1px solid #1a1a1a;padding-bottom:6px}
+h1{font-size:34px;font-weight:700;margin:14px 0 22px}
+.cols{display:grid;grid-template-columns:1fr 54px 1fr;gap:0}.rail{border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;display:flex;flex-direction:column;align-items:center;gap:74px;padding-top:6px;color:#c43d1f;font:500 14px "Alegreya Sans SC"}
+.c{padding:0 22px}.c p{margin-bottom:16px}
+.margin{position:absolute;left:1170px;top:120px;width:230px;font-size:13px;line-height:1.5}.margin div{border-top:1px solid #1a1a1a;padding:8px 0 16px}.margin b{color:#c43d1f;font-family:"Alegreya Sans SC"}
+</style></head><body>
+<nav>Control center<br><b>Daily reports</b><br>Approvals<br>Tasks &amp; runs<br>Agents<br>Audit</nav>
+<div class="page"><div class="h">Harbor Foods · Finance and Accounting Agent · 15 October 2026 · so far</div>
+<h1>Five actions attempted; four completed; one awaits approval.</h1>
+<div class="cols"><div class="c"><p>The agent read nineteen open invoices and found INV-9001 forty days overdue with a balance of 5,000.00 USD.</p><p>It drafted a reminder and held the send for the owner's approval, as the configuration requires.</p></div>
+<div class="rail"><span>a</span><span>b</span><span>c</span></div>
+<div class="c"><p>INV-9002 lists lines adding to 12,000.00 USD against a recorded total of 12,500.00; it was escalated, not reminded.</p><p>No AI model was called; the plan came from the development playbook.</p></div></div></div>
+<div class="margin"><div><b>a</b> invoices.read — succeeded, 19 records, run 8f3c…</div><div><b>b</b> reminder.send — held, request AR-214</div><div><b>c</b> escalate — succeeded, severity high</div></div>
+</body></html>

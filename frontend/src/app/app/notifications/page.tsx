@@ -123,7 +123,7 @@ export default function NotificationsPage() {
   const prefs = useOrgData<NotificationPrefs>("/api/v1/notifications/preferences");
   return (
     <>
-      <PageHeader eyebrow="Workspace" title="Notifications"
+      <PageHeader title="Notifications"
         description="Alerts about approvals, escalations, failed or unverified work, budgets and daily reports — sent to the people whose permissions let them act." />
       <Tabs label="Notifications" items={[
         { key: "inbox", label: "Inbox", content: <Inbox /> },

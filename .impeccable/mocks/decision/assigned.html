@@ -1,0 +1,44 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Annual Report — Control Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}body{width:1440px;height:900px;overflow:hidden;font:15px/1.45 "Public Sans",sans-serif;color:#121a18;background:#f4f6f5;display:grid;grid-template-columns:248px 1fr 320px}
+nav{background:#0f3d36;color:#e6efec;padding:22px 18px;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;gap:10px;align-items:center;font:800 15px "Schibsted Grotesk";letter-spacing:.01em}.mark{width:30px;height:30px;border:2px solid #c8962b;display:grid;place-items:center;font:800 12px "Schibsted Grotesk";color:#c8962b}
+.ws{border-top:1px solid #2a5a52;border-bottom:1px solid #2a5a52;padding:12px 0;display:flex;gap:10px;align-items:center}.logo{width:34px;height:34px;border-radius:6px;background:#e3a21a;display:grid;place-items:center;font-weight:800;color:#0f3d36}
+.grp{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8fb3aa;margin-bottom:6px}.item{padding:7px 10px;border-radius:5px;color:#cfe0db}.on{background:#1d5249;color:#fff;box-shadow:inset 3px 0 #c8962b}
+main{padding:30px 40px;overflow:hidden}.eyebrow{font:600 12px "Public Sans";letter-spacing:.14em;text-transform:uppercase;color:#2a7a68}
+h1{font:800 34px/1.1 "Schibsted Grotesk";margin:6px 0 4px}.sub{color:#4b5a56}
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:28px 0;border-top:3px solid #121a18}
+.fig{padding:18px 22px 20px 0;border-right:1px solid #cdd6d3;margin-right:22px}.fig:last-child{border:0}
+.n{font:800 64px/1 "Schibsted Grotesk";font-variant-numeric:tabular-nums;letter-spacing:-.02em}.n sup{font:700 15px "Public Sans";color:#c8962b;vertical-align:super;margin-left:4px}
+.lab{font-weight:600;margin-top:8px}.meta{color:#4b5a56;font-size:13px}
+.cap{height:8px;background:#dfe6e3;margin-top:10px;position:relative}.cap i{position:absolute;inset:0 62% 0 0;background:#2a7a68}.cap b{position:absolute;right:0;top:-5px;width:2px;height:18px;background:#121a18}
+table{width:100%;border-collapse:collapse;background:#fff}th{text-align:left;font:600 12px "Public Sans";letter-spacing:.08em;text-transform:uppercase;color:#4b5a56;padding:10px 12px;border-bottom:2px solid #121a18}
+td{padding:11px 12px;border-bottom:1px solid #e3e8e6}.st{display:inline-flex;gap:6px;align-items:center;font-weight:600;font-size:13px}.ok{color:#0e6b4f}.wait{color:#8f5b00}.k{color:#c8962b;font-weight:700;font-size:12px;vertical-align:super}
+aside{background:#fff;border-left:1px solid #cdd6d3;padding:30px 24px}aside h2{font:800 15px "Schibsted Grotesk";border-bottom:3px solid #121a18;padding-bottom:8px;margin-bottom:14px}
+.note{display:grid;grid-template-columns:22px 1fr;gap:6px;padding:10px 0;border-bottom:1px solid #e3e8e6;font-size:13px}.note b{color:#c8962b}.note a{color:#0f3d36;font-weight:600}
+.dev{margin-top:18px;font-size:12px;color:#8f5b00;background:#fbf3e3;padding:8px 10px;border-left:3px solid #c8962b}
+</style></head><body>
+<nav><div class="brand"><span class="mark">OS</span>AI Business OS</div>
+<div class="ws"><span class="logo">HF</span><div><div style="font-weight:600;color:#fff">Harbor Foods</div><div style="font-size:12px;color:#8fb3aa">Food distribution · Owner</div></div></div>
+<div><div class="grp">Reporting</div><div class="item on">Control Center</div><div class="item">Daily reports</div><div class="item">Notifications</div><div class="item">Usage &amp; costs</div></div>
+<div><div class="grp">AI workforce</div><div class="item">Agent directory</div><div class="item">Tasks &amp; runs</div><div class="item">Simulation</div></div>
+<div><div class="grp">Governance</div><div class="item">Approval inbox · 2</div><div class="item">Business rules</div><div class="item">Audit log</div></div></nav>
+<main><div class="eyebrow">Control Center · 9–15 Oct 2026 · Asia/Manila</div><h1>This week, by the record</h1><p class="sub">Every figure links to the runs, tool calls and approvals it was counted from.</p>
+<div class="figs">
+<div class="fig"><div class="n">41<sup>1</sup></div><div class="lab">Tasks completed</div><div class="meta">of 46 attempted · 3 need review</div></div>
+<div class="fig"><div class="n">2<sup>2</sup></div><div class="lab">Actions awaiting your approval</div><div class="meta">oldest held 3 h 10 min</div></div>
+<div class="fig"><div class="n">₱3,420<sup>3</sup></div><div class="lab">AI spend this month</div><div class="meta">of ₱9,000 budget</div><div class="cap"><i></i><b></b></div></div></div>
+<table><thead><tr><th>Run</th><th>Agent</th><th>Outcome</th><th>Evidence</th></tr></thead><tbody>
+<tr><td>Review outstanding invoices</td><td>Finance</td><td><span class="st wait">◌ Awaiting approval</span></td><td>6 tool calls <span class="k">4</span></td></tr>
+<tr><td>Weekly KPI review</td><td>Executive</td><td><span class="st ok">● Completed</span></td><td>4 tool calls</td></tr>
+<tr><td>Categorise expenses</td><td>Finance</td><td><span class="st ok">● Completed</span></td><td>3 tool calls</td></tr>
+<tr><td>Supplier follow-ups</td><td>Procurement</td><td><span class="st">⊘ Not connected</span></td><td>—</td></tr></tbody></table></main>
+<aside><h2>Notes</h2>
+<div class="note"><b>1</b><div>Counted from 46 workflow runs; only <em>succeeded</em> or reconciled actions count. <a>Open runs →</a></div></div>
+<div class="note"><b>2</b><div>Reminder to Bayside Traders, ₱5,000.00 balance; Northgate escalation. <a>Approval inbox →</a></div></div>
+<div class="note"><b>3</b><div>From the usage ledger, company time zone. <a>Usage &amp; costs →</a></div></div>
+<div class="note"><b>4</b><div>invoices.read, reminder.draft, escalate … <a>Evidence ledger →</a></div></div>
+<div class="dev">Development mode — no AI model was called; costs are zero in dev.</div></aside>
+</body></html>

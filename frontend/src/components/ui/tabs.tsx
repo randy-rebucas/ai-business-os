@@ -27,7 +27,7 @@ export function Tabs({ items, label, initial }: { items: TabItem[]; label: strin
 
   return (
     <div>
-      <div role="tablist" aria-label={label} className="mb-5 flex gap-1 overflow-x-auto border-b border-border">
+      <div role="tablist" aria-label={label} className="mb-5 flex gap-1 overflow-x-auto border-b-2 border-rule">
         {items.map((item, i) => {
           const selected = item.key === active;
           return (
@@ -43,8 +43,8 @@ export function Tabs({ items, label, initial }: { items: TabItem[]; label: strin
               onClick={() => setActive(item.key)}
               onKeyDown={(e) => onKey(e, i)}
               className={cn(
-                "-mb-px flex items-center gap-1.5 whitespace-nowrap border-b-2 px-3 py-2 text-sm transition-colors",
-                selected ? "border-accent font-medium text-fg" : "border-transparent text-muted hover:text-fg",
+                "-mb-0.5 flex items-center gap-1.5 whitespace-nowrap border-b-4 px-3 py-2 text-sm transition-colors",
+                selected ? "border-accent font-semibold text-fg" : "border-transparent text-muted hover:text-fg",
               )}
             >
               {item.label}

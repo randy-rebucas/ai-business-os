@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { Alert, Badge, Card, CardHeader, ErrorState, Meta, PageHeader, Spinner, Table, td, th } from "@/components/ui/display";
+import { Alert, Badge, Capacity, Card, CardHeader, ErrorState, Meta, PageHeader, Spinner, Table, td, th } from "@/components/ui/display";
 import { Field, Input } from "@/components/ui/form";
 import { useOrgData } from "@/lib/hooks";
 import type { UsageSummary } from "@/lib/types";
@@ -15,7 +15,7 @@ export default function UsagePage() {
   const { data: u, error } = useOrgData<UsageSummary>(`/api/v1/usage?${query}`, { keepPreviousData: true });
   return (
     <>
-      <PageHeader eyebrow="Workspace" title="Usage & costs"
+      <PageHeader title="Usage & costs"
         description="Every AI model call and tool execution, from the usage ledger. Agents stop running when they reach their approved monthly budget." />
       {error ? <ErrorState error={error} /> : !u ? <Spinner /> : (
         <div className="space-y-6">
@@ -34,10 +34,16 @@ export default function UsagePage() {
             <Card>
               <CardHeader title="Budgets this month" description={`Spent so far: ${u.month_to_date_usd} USD`} />
               {u.company_budget && (
-                <dl className="border-b border-border px-5 py-3">
-                  <Meta label="Company budget">{`${u.company_budget.amount} ${u.company_budget.currency}`}{!u.company_budget.comparable && <span className="block text-xs text-muted">Not in USD — no exchange rate is assumed, so it isn&apos;t compared.</span>}
-                    {u.company_budget.over && <Badge tone="danger" className="ml-2">Reached</Badge>}</Meta>
-                </dl>
+                <div className="border-b border-border px-5 py-3">
+                  <dl>
+                    <Meta label="Company budget">{`${u.company_budget.amount} ${u.company_budget.currency}`}{!u.company_budget.comparable && <span className="block text-xs text-muted">Not in USD — no exchange rate is assumed, so it isn&apos;t compared.</span>}
+                      {u.company_budget.over && <Badge tone="danger" className="ml-2">Reached</Badge>}</Meta>
+                  </dl>
+                  {u.company_budget.comparable && (
+                    <div className="mt-2"><Capacity used={Number(u.month_to_date_usd)} limit={Number(u.company_budget.amount)}
+                      label="Month-to-date spend against the company budget" format={(n) => `${n.toFixed(2)} USD`} /></div>
+                  )}
+                </div>
               )}
               <Table label="Agent budgets">
                 <thead><tr><th className={th}>Agent</th><th className={th}>Budget</th><th className={th}>Spent</th><th className={th}>Remaining</th></tr></thead>
@@ -45,7 +51,10 @@ export default function UsagePage() {
                   {u.agent_budgets.map((b) => (
                     <tr key={b.instance_id}>
                       <td className={td}><Link href={`/app/agents/${b.instance_id}`} className="text-accent underline underline-offset-2">{b.agent}</Link></td>
-                      <td className={td}>{b.budget_usd ?? "—"}</td><td className={td}>{b.spent_usd}</td>
+                      <td className={td}>{b.budget_usd ?? "—"}</td>
+                      <td className={`${td} min-w-40`}>{b.budget_usd != null
+                        ? <Capacity used={Number(b.spent_usd)} limit={Number(b.budget_usd)} label={`${b.agent} spend against its monthly budget`} format={(n) => `${n.toFixed(2)} USD`} />
+                        : b.spent_usd}</td>
                       <td className={td}>{b.over ? <Badge tone="danger">Reached — runs skipped</Badge> : b.remaining_usd ?? "—"}</td>
                     </tr>
                   ))}

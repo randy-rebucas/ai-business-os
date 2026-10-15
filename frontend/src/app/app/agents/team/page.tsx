@@ -102,7 +102,7 @@ export default function TeamPage() {
   const { data, error } = useOrgData<Recommendation>("/api/v1/agents/recommendation");
   return (
     <>
-      <PageHeader eyebrow="AI workforce" title="Build your team"
+      <PageHeader title="Build your team"
         description="We recommend AI employees from your company profile, documents and budget — with the reason for each. Adjust the selection to build a custom team." />
       {error ? <ErrorState error={error} /> : !data ? <Spinner /> : data.items.every((i) => !i.recommended) && data.profile_gaps.length ? (
         <>

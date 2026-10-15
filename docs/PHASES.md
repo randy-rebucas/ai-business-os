@@ -136,3 +136,23 @@ SSO/MFA, multi-region, fine-tuning.
       not run** (no commits/remote) — see STATUS
 - [x] Continuous evaluation controls (SPEC §4): pause/resume/edit/re-test/rollback/retire existed (Phases 3–4);
       Control Center now lists agents affected by a material change until re-tested (`test_continuous_eval.py`)
+
+## Phase 8 — Design: platform identity + tenant branding
+Direction chosen with the user: **The Annual Report** (`.impeccable/surfaces/frontend-src-app-app.md`, ADR-035).
+Product context: `PRODUCT.md`; visual system recorded in `DESIGN.md` at the end.
+- [x] Platform identity: logo mark, palette and type tokens (light + dark), shell (green rail with brass rule,
+      workspace block, daily-review-first navigation), shared components (buttons, glyph+word badges, ruled tables,
+      report sections, forms) and public pages (landing as a report cover + contents page, auth)
+- [x] Signature move: report-scale figures with superscript note keys that open Notes linking to their records
+      (Control Center, daily reports)
+- [x] Raises: budgets as capacity bars (usage, Control Center); states as glyph + word; readiness shows the next
+      step and what it unlocks; the approval inbox focuses one held action with the queue beside it
+- [x] Tenant branding backend: logo upload (magic-byte sniffing, 1 MB / 4096 px limits, re-encoded PNG, SVG refused),
+      palette extraction, brand-as-fill when it carries text at 4.5:1, hue-preserving text accent fitted to every
+      surface of both themes, rail marker ≥ 3:1, brass-like accents switch note keys to ink, type mood from industry,
+      owner overrides; API with permissions, RLS, audit, export + deletion coverage (`test_branding.py`)
+- [x] Tenant theming frontend: runtime `--brand-*`/`--mood-*` tokens, workspace logo in the rail, Settings → Branding
+      with palette, contrast checks, adjustments and live preview
+- [x] Verified: pytest 568 passed; lint/typecheck/build clean; Playwright 9/9 incl. `phase8.spec.ts` (yellow logo
+      workspace) with axe AA on every page; desktop + mobile screenshots; impeccable detector clean; finish review
+      (two fix rounds — see STATUS)
