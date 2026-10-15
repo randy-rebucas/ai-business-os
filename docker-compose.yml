@@ -1,0 +1,39 @@
+name: abos
+
+# Development database + Redis:   docker compose up -d postgres redis
+# Every port binds to 127.0.0.1 only.
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: abos
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-abos_dev_password}
+      POSTGRES_DB: abos
+    ports:
+      - "127.0.0.1:${ABOS_DB_PORT:-55470}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infra/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U abos -d abos"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "127.0.0.1:${ABOS_REDIS_PORT:-56470}:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:
+  redisdata:

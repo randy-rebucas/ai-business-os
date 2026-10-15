@@ -1,0 +1,64 @@
+# Example production topology (docs/DEPLOYMENT.md). Single host; for managed Postgres/Redis/S3 drop those services
+# and point the URLs at them. Secrets come from an env file that is NOT committed:
+#   docker compose -f infra/deploy/compose.prod.yml --env-file /etc/abos/prod.env up -d
+# A TLS-terminating reverse proxy (Caddy, nginx, a cloud load balancer) must sit in front of `web` — the app sets
+# Secure/__Host- cookies and HSTS and refuses to start in production with http base URLs.
+name: abos-prod
+
+x-backend: &backend
+  image: ${ABOS_BACKEND_IMAGE:-abos-backend:latest}
+  restart: unless-stopped
+  env_file: ${ABOS_ENV_FILE:-/etc/abos/prod.env}
+  environment:
+    ABOS_ENV: production
+    ABOS_REDIS_URL: redis://redis:6379/0
+  depends_on:
+    redis: { condition: service_healthy }
+
+services:
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: [redisdata:/data]
+    healthcheck: { test: ["CMD", "redis-cli", "ping"], interval: 5s, timeout: 3s, retries: 20 }
+
+  # One-shot: schema migrations as the table owner (ABOS_MIGRATION_DATABASE_URL). Run before api/worker on deploys.
+  migrate:
+    <<: *backend
+    restart: "no"
+    environment:
+      ABOS_ENV: production
+      ABOS_DATABASE_URL: ${ABOS_MIGRATION_DATABASE_URL:?owner login for migrations}
+    command: ["alembic", "upgrade", "head"]
+
+  api:
+    <<: *backend
+    environment:
+      ABOS_ENV: production
+      ABOS_REDIS_URL: redis://redis:6379/0
+      FORWARDED_ALLOW_IPS: "*"   # only reachable on the internal network, from `web`; never publish this port
+    expose: ["8470"]
+
+  # Executes jobs AND the beat tasks (schedule tick, sweep, housekeeping), so it alone gets the owner-path URL.
+  worker:
+    <<: *backend
+    environment:
+      ABOS_ENV: production
+      ABOS_REDIS_URL: redis://redis:6379/0
+      ABOS_MAINTENANCE_DATABASE_URL: ${ABOS_MAINTENANCE_DATABASE_URL:?owner login for housekeeping}
+    command: ["celery", "-A", "abos.jobs.worker", "worker", "-Q", "abos", "--loglevel=info", "--concurrency=4"]
+    healthcheck: { disable: true }
+
+  beat:   # exactly one instance
+    <<: *backend
+    command: ["celery", "-A", "abos.jobs.worker", "beat", "--loglevel=info", "--schedule=/tmp/celerybeat-schedule"]
+    healthcheck: { disable: true }
+
+  web:
+    image: ${ABOS_WEB_IMAGE:-abos-web:latest}
+    restart: unless-stopped
+    depends_on: [api]
+    ports: ["127.0.0.1:3470:3470"]   # the TLS proxy on this host forwards to it
+
+volumes:
+  redisdata:
